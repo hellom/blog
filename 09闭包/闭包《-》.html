@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包一</title>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+	<div id="divTest">
+        <span>0</span> <span>1</span> <span>2</span> <span>3</span>
+    </div>
+    <div id="divTest2">
+        <span>0</span> <span>1</span> <span>2</span> <span>3</span>
+    </div>
+    <script>
+    	function outerFn() {
+            document.write("Outer function<br/>");
+            function innerFn() {
+                var innerVar = 0;
+                innerVar++;
+                document.write("Inner function\t");
+                document.write("innerVar = "+innerVar+"<br/>");
+            }
+            return innerFn;
+        }
+        var fnRef = outerFn();
+        fnRef();
+        fnRef();
+        var fnRef2 = outerFn();
+        fnRef2();
+        fnRef2();
+    </script>
+</body>
+</html>

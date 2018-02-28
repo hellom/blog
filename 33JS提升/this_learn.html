@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this学习</title>
+</head>
+<body>
+
+    <div id='div1'>你好，div</div>
+
+    <script type="text/javascript">
+    /**
+    this简介：在javascript中，this总是指向一个对象，而具体指向那个对象，取决于运行时函数所处的执行环境，而非函数声明的环境
+    this的主要用法：
+        1. 作为对象的方法使用
+        2. 作为普通函数使用
+        3. 构造器调用
+        4. Function.prototype.call 或 Function.prototype.apply调用
+    **/
+
+    // 1.作为对象的方法使用
+    var obj = {
+        a : 1,
+        getA: function(){
+            console.log(this === obj);
+            console.log(this.a);
+        }
+    }
+    obj.getA();
+
+    // 2. 作为普通函数调用 this总是指向全局对象 windows环境即window对象
+    window.name = 'zhangshagnjin';
+    var getName = function(){
+        var name = 'zhangshan';
+        return this.name;
+    }
+    console.log(getName());
+
+    var obj_1 = {
+        name : 1,
+        getA: function(){
+            return this.name
+        }
+    }
+    var getB = obj_1.getA;
+    console.log(getB());
+
+    var id = 'div2';
+    document.querySelector('#div1').onclick = function(){
+        console.log(this.id);
+        var callBack = function(){
+            console.log(this.id);
+        }
+        callBack();
+    }
+
+    // 3. 构造器使用 使用new运算符调用函数 构造器里面的this总是 指向该对象 除非该对象显示的返回一个object 此情况下 this指向这个显示返回的object
+    var myClass = function(){
+        this.name = 'sven';
+    }
+    var obj = new myClass();
+    console.log(obj.name); // sven
+
+    var myClass1 = function(){
+        this.name = 'sven';
+        return {
+            name : 'ts'
+        }
+    }
+    var obj2 = new myClass1();
+    console.log(obj2.name); // ts
+
+    // 4. Function.prototype.call 或 Function.prototype.apply调用 动态的改变传入函数的this
+    var obj3 = {
+        name : 'sven',
+        getName : function(){
+            return this.name;
+        }
+    }
+    var obj4 = {
+        name : 'ts'
+    }
+    console.log(obj3.getName()); // sven
+    console.log(obj3.getName.call(obj4)); // ts
+
+    </script>
+
+
+
+</body>
+</html>

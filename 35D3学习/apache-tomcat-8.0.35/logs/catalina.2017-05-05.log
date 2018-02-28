@@ -1,0 +1,71 @@
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.35
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          May 11 2016 21:57:08 UTC
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.35.0
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 8.1
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.3
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             D:\Program Files\Java\jdk1.8.0_51
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_51-b16
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=F:/≤‚ ‘—ßœ∞/35D3—ßœ∞/apache-tomcat-8.0.35/conf/logging.properties
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=F:/≤‚ ‘—ßœ∞/35D3—ßœ∞/apache-tomcat-8.0.35/endorsed
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=F:/≤‚ ‘—ßœ∞/35D3—ßœ∞/apache-tomcat-8.0.35
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=F:/≤‚ ‘—ßœ∞/35D3—ßœ∞/apache-tomcat-8.0.35
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=F:/≤‚ ‘—ßœ∞/35D3—ßœ∞/apache-tomcat-8.0.35/temp
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded APR based Apache Tomcat Native library 1.2.7 using APR version 1.5.2.
+05-May-2017 10:27:49.857 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+05-May-2017 10:27:50.389 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized (OpenSSL 1.0.2h  3 May 2016)
+05-May-2017 10:27:50.505 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-apr-8080"]
+05-May-2017 10:27:50.505 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-apr-8009"]
+05-May-2017 10:27:50.505 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 935 ms
+05-May-2017 10:27:50.536 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+05-May-2017 10:27:50.536 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.35
+05-May-2017 10:27:50.574 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\D3
+05-May-2017 10:27:50.836 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\D3 has finished in 262 ms
+05-May-2017 10:27:50.836 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\docs
+05-May-2017 10:27:50.858 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\docs has finished in 22 ms
+05-May-2017 10:27:50.858 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\email
+05-May-2017 10:27:50.874 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\email has finished in 16 ms
+05-May-2017 10:27:50.874 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\examples
+05-May-2017 10:27:51.190 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\examples has finished in 316 ms
+05-May-2017 10:27:51.190 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\host-manager
+05-May-2017 10:27:51.206 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\host-manager has finished in 16 ms
+05-May-2017 10:27:51.206 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\lottery
+05-May-2017 10:27:51.222 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\lottery has finished in 16 ms
+05-May-2017 10:27:51.222 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\mail
+05-May-2017 10:27:51.237 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\mail has finished in 15 ms
+05-May-2017 10:27:51.237 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\manager
+05-May-2017 10:27:51.259 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\manager has finished in 22 ms
+05-May-2017 10:27:51.259 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\ROOT
+05-May-2017 10:27:51.259 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory F:\≤‚ ‘—ßœ∞\35D3—ßœ∞\apache-tomcat-8.0.35\webapps\ROOT has finished in 0 ms
+05-May-2017 10:27:51.275 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
+05-May-2017 10:27:51.275 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
+05-May-2017 10:27:51.275 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 773 ms
+05-May-2017 14:13:13.293 SEVERE [ajp-apr-8009-exec-2] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:13.510 SEVERE [ajp-apr-8009-exec-4] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:25.229 SEVERE [ajp-apr-8009-exec-6] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:25.369 SEVERE [ajp-apr-8009-exec-8] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:27.973 SEVERE [ajp-apr-8009-exec-10] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:28.059 SEVERE [ajp-apr-8009-exec-2] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:29.049 SEVERE [ajp-apr-8009-exec-4] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:29.098 SEVERE [ajp-apr-8009-exec-6] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:29.522 SEVERE [ajp-apr-8009-exec-8] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:29.576 SEVERE [ajp-apr-8009-exec-10] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:29.746 SEVERE [ajp-apr-8009-exec-2] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:29.910 SEVERE [ajp-apr-8009-exec-5] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:29.912 SEVERE [ajp-apr-8009-exec-6] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:30.015 SEVERE [ajp-apr-8009-exec-8] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:31.241 SEVERE [ajp-apr-8009-exec-10] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:31.293 SEVERE [ajp-apr-8009-exec-2] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:31.756 SEVERE [ajp-apr-8009-exec-4] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:31.801 SEVERE [ajp-apr-8009-exec-6] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:32.005 SEVERE [ajp-apr-8009-exec-8] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:32.054 SEVERE [ajp-apr-8009-exec-10] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:34.257 SEVERE [ajp-apr-8009-exec-2] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:13:34.311 SEVERE [ajp-apr-8009-exec-4] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:15:12.130 SEVERE [ajp-apr-8009-exec-6] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245
+05-May-2017 14:15:12.188 SEVERE [ajp-apr-8009-exec-8] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature 18245

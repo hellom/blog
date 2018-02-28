@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>jq-contains</title>
+        <style>
+            .parent{width: 200px;height: 200px;border: 1px solid #aaa}
+            .children{width: 100px;height: 100px;margin: 0 auto;margin-top: 50px;background: #aaa;}
+        </style>
+    </head>
+    <body>
+        <div class="parent">
+            <div class="children"></div>
+        </div>
+        <div class="other"></div>
+        <div id="one">one</div>
+        <div id="two">two</div>
+
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </body>
+    <script src="jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        var $p = document.querySelector('.parent');
+        var $c = document.querySelector('.children');
+        var $o = document.querySelector('.other');
+        // jq contains()方法 必须传dom对象 不能传jquery对象
+        var bool = $.contains($p,$c);
+        console.log(bool);
+
+        // js 原生实现
+        function isParent(obj,parentObj) {
+            while (obj != undefined && obj != null && obj.tagName.toUpperCase()!= 'BODY') {
+                if(obj === parentObj){
+                    return true
+                }
+                obj = obj.parentNode;
+            }
+            return false;
+        }
+        var bool2 = isParent($c,$p);
+        console.log(bool2);
+
+        // js contains()方法
+        var bool3 = $p.contains($c);
+        console.log(bool3);
+
+        //js 检测数据类型 参考： https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString
+        var toString = Object.prototype.toString;
+        var a = {b:1}
+        toString.call(a);// [object Date]
+        console.log(toString.call(null));
+        //参考: http://blog.garstasio.com/you-dont-need-jquery/utils/
+        //$.extend()方法
+        var o1 = {
+            a: 'a',
+            b: {
+                b1: 'b1'
+            }
+        },
+
+        o2 = {
+            b: {
+                b2: 'b2'
+            },
+            c: 'c'
+        };
+        // var e1 = $.extend(true,o1,o2);
+        // console.log(e1);//o1变为合成后的对象
+        // var e2 = $.extend(true,{},o1,o2);
+        // console.log(e2);//深拷贝一个新的对象 原o1 o2没变
+        // var e3 = $.extend(true,{},o1);
+        // console.log(e3);//深拷贝o1对象
+        // 原生实现类 $.extend(true,o1,o2);
+        function extend(first,second){
+            for(var secondProp in second){
+                var secondVal = second[secondProp];
+                if(secondVal && Object.prototype.toString.call(secondVal) === "[object][object]"){
+                    first[secondProp] = first[secondProp] || {};
+                    extend(first[secondProp],secondVal);
+                }else{
+                    first[secondProp] = secondVal;
+                }
+            }
+            return first;
+        }
+        var newObj = extend(extend({}, o1), o2);
+
+        //改变一个函数
+
+        /* 改变this上下文
+        */
+        // function Outer(){
+        //     this.foo = 'bar';
+        //     var eventHandler = function (event) {
+        //         this.foo = 'buzz';
+        //     }
+        //     eventHandler();
+        // }
+        // var outer = new Outer();
+        // console.log(outer.foo === 'buzz');//false
+        // function Outer() {
+        //     var eventHandler = $.proxy(function(event) {
+        //         this.foo = 'buzz';
+        //     }, this);
+        //
+        //     this.foo = 'bar';
+        //     // attach `eventHandler`...
+        //     eventHandler();
+        // }
+        //
+        // var outer = new Outer();
+        // console.log(outer.foo == 'buzz');//true
+
+        /*
+        */
+
+        $('#one').data('partnerElement', $('#two'));
+        $('#two').data('partnerElement', $('#one'));
+        $('#one, #two').click(function() {
+            $(this).data('partnerElement').toggle();
+        });
+
+        var data = (function(){
+            var lastId = 0, store = {};
+            return {
+                set: function(element,info){
+                    var id;
+                    if(element.myCustomDataTag === undefined){
+                        id = lastId++;
+                        element.myCustomDataTag = id;
+                    }
+                    store[id] = info;
+                },
+                get: function(element){
+                    return store[element.myCustomDataTag];
+                }
+            }
+        })()
+        data.set(one, {partnerElement: two});
+        data.set(two, {partnerElement: one});
+
+        // Function.prototype.bind = function(){
+        //     var self = this , context = [].shift.call(arguments) , args = [].slice.call(arguments);
+        //     return function(){
+        //         self.apply(context,[].concat.call(args,[].slice.call(arguments)));
+        //     }
+        //
+        // };
+        var obj = {
+            name: 'sven'
+        };
+        var func = function( a, b, c, d ){
+            alert ( this.name ); // 输出： sven
+            alert ( [ a, b, c, d ] ) // 输出： [ 1, 2, 3, 4 ]
+        }.bind( obj, 1, 2 );
+
+        // func(3,4);
+
+        var nodes = document.getElementsByTagName( 'div' );
+        for ( var i = 0, len = nodes.length; i < len; i++ ){
+            // nodes[ i ].onclick = function(){
+            //     alert ( i );
+            // }
+            (function(i){
+                nodes[ i ].onclick = function(){
+                        alert(i);
+                }
+            })(i)
+        };
+
+        // 检测数据类型
+    </script>
+</html>

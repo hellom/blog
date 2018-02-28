@@ -1,0 +1,193 @@
+.navlistWrap {
+  padding-bottom: 2%;
+}
+.header {
+  height: 1.08rem;
+  margin: 0 0.4rem;
+}
+.header .logo {
+  margin-top: 0.4rem;
+  width: 1.32rem;
+}
+.header .more {
+  margin-top: 0.45rem;
+  width: 0.33rem;
+  float: right;
+}
+.swiperWrap {
+  width: 100%;
+  height: 47%;
+}
+.swiper-container {
+  width: 100%;
+  height: 3.5rem;
+}
+.swiper-container a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.swiper-container .first {
+  background: url('../assets/lunbo/1.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.swiper-container .second {
+  background: url('../assets/lunbo/2.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.swiper-container .third {
+  background: url('../assets/lunbo/3.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.swiper-container .fourth {
+  background: url('../assets/lunbo/4.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.mainPro {
+  margin-top: 0.7rem;
+  margin-bottom: 0.16rem;
+}
+.mainPro .proHeader {
+  margin-left: 4%;
+  height: 1.12rem;
+}
+.mainPro .proHeader div {
+  width: 0.4rem;
+  height: 0.4rem;
+  display: inline-block;
+  margin-top: 0.36rem;
+}
+.mainPro .proHeader span {
+  color: #0071bb;
+  font-size: 0.3rem;
+  margin-left: 0.4rem;
+}
+.mainPro .proHeader .pro1 {
+  background: url('../assets/mainpro/pro1.png') no-repeat 0 0.1rem;
+  background-size: 100%;
+}
+.mainPro .proHeader .pro2 {
+  background: url('../assets/mainpro/pro2.png') no-repeat 0 0.06rem;
+  background-size: 100%;
+}
+.mainPro .proHeader .pro3 {
+  background: url('../assets/mainpro/pro3.png') no-repeat 0 0.1rem;
+  background-size: 100%;
+}
+.mainPro .onePro {
+  width: 92%;
+  margin: 0 auto;
+  position: relative;
+}
+.mainPro .onePro img {
+  width: 100%;
+}
+.mainPro .onePro p {
+  color: #3c3c3c;
+  font-size: 0.2rem;
+  text-align: center;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.mainPro .onePro a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+}
+.mainPro .proBorder {
+  padding-bottom: 0.6rem;
+  background: url('../assets/mainpro/border.png') no-repeat bottom;
+}
+.newslist {
+  background-color: #f1f1f1;
+  padding: 3% 3% 7% 3%;
+  width: 94%;
+}
+.newslist .newsheader {
+  height: 1.3rem;
+  line-height: 1.3rem;
+  color: #006ec3;
+  font-size: 0.32rem;
+  margin-left: 0.1rem;
+}
+.newslist .oneNews {
+  height: 1.1rem;
+  line-height: 1.1rem;
+  border-top: 1px solid #cecece;
+}
+.newslist .oneNews a {
+  width: 100%;
+  height: 1.1rem;
+  display: inline-block;
+}
+.newslist .oneNews a:visited .newsType {
+  color: #75a3c7;
+}
+.newslist .oneNews a:visited span {
+  color: #909090;
+}
+.newslist .oneNews span {
+  display: block;
+  font-size: 0.28rem;
+  color: #4d4e4e;
+  float: left;
+  margin: 0 1%;
+}
+.newslist .oneNews .newsType {
+  line-height: 1.1rem;
+  width: 12%;
+  color: #006ec3;
+}
+.newslist .oneNews .newsBrief {
+  width: 60%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.newslist .oneNews .newsDate {
+  width: 18%;
+  font-size: 0.24rem;
+  text-align: right;
+}
+.newslist .newsMore {
+  height: 0.88rem;
+  padding-top: 0.18rem;
+}
+.newslist .newsMore a {
+  width: 2.8rem;
+  height: 0.5rem;
+  display: block;
+  margin: 0 auto;
+}
+.newslist .newsMore span {
+  color: #909090;
+  font-size: 0.26rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  width: 100%;
+  display: block;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 3px;
+}
+.connection {
+  width: 100%;
+  height: 1rem;
+  background-color: #313d55;
+}
+.connection div {
+  width: 49%;
+  height: 100%;
+  float: left;
+  text-align: center;
+}
+.connection img {
+  width: 0.65rem;
+  height: 0.65rem;
+  padding-top: 0.17rem;
+}
+.connection .phoneWrap {
+  border-right: 2px solid #d6d8dd;
+}

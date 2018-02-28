@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+		@media print{
+			#nihao{
+				color:red;
+			}
+		}
+	</style>
+</head>
+<body>
+	<table align="center" class="ml70">
+        <tbody>
+            <tr>
+                <td colspan="8">
+                    <div align="center">
+                        <b><span >不打印的内容部分//////////////////////</span></b></div>
+                    <div>
+            </tr>
+        </tbody>
+    </table>
+    <a href="#" onclick="javascript:history.back(1); event.returnValue=false">
+        << 返回</a><br />
+            <!--startprint-->
+            <br />
+            <table align="center" class="ml70">
+                <tbody>
+                    <tr>
+                        <td colspan="8">
+                            <div align="center">
+                                <b><span >//////////////////////要打印的内容部分//////////////////////</span><a id='nihao'>你好啊~~~</a></b></div>
+                            <div>
+                    </tr>
+                </tbody>
+            </table>
+            <!--endprint-->
+            <input type="button" value="打印" onClick="printPage()" />
+
+            <iframe id="printf" src="" width="0" height="0" frameborder="0"></iframe>
+
+</body>
+ <script type="text/javascript">  
+        function printPage() {  
+            //获取当前页的html代码  
+            var bodyhtml = window.document.body.innerHTML;  
+            //设置打印开始区域、结束区域  
+            var startFlag = "<!--startprint-->";  
+            var endFlag = "<!--endprint-->";  
+            // 要打印的部分  
+            var printhtml = bodyhtml.substring(bodyhtml.indexOf(startFlag),   
+                    bodyhtml.indexOf(endFlag));  
+            // 生成并打印ifrme  
+            var f = document.getElementById('printf'); 
+            f.contentDocument.write(printhtml);
+            f.contentDocument.close();
+            f.contentWindow.print();
+        }  
+    </script>
+</html>

@@ -1,0 +1,28 @@
+.strategyHeader {
+  height: 1.08rem;
+  position: relative;
+  background-color: #ebebeb;
+}
+.strategyHeader h1 {
+  height: 1.08rem;
+  line-height: 1.08rem;
+  text-align: center;
+  margin: 0 0.4rem;
+  font-size: 0.4rem;
+  color: #4d4e4e;
+}
+.strategyHeader .more {
+  width: 0.33rem;
+  position: absolute;
+  top: 0.45rem;
+  right: 0.4rem;
+}
+.strategyWrap .contentWrap {
+  font-size: 0.3rem;
+  color: #909090;
+  line-height: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.strategyWrap .contentWrap img {
+  width: 50%;
+}

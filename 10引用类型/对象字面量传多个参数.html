@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象字面量传多个参数</title>
+</head>
+<body>
+	<script>
+
+		displayInfo({"name":"zhangshangjin","age":27});
+		function displayInfo(args){
+			var output = "";
+			if(typeof args.name == "string"){
+				output += "Name:"+args.name+"\n";
+			}
+			if(typeof args.age == "number"){
+				output += "Age:"+args.age+"\n";
+			}
+			alert(output);
+		}
+
+	</script>
+</body>
+</html>

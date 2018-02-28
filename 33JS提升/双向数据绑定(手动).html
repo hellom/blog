@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>data-binding-method-set</title>
+</head>
+<body>
+   <!--  <input q-value="value" type="text" id="input">
+    <div q-text="value" id="el"></div> -->
+
+    <input q-event="value" ng-bind="value" type="text" id="input">
+    <p q-event="text" ng-bind="value" id="el"></p>
+    <script>
+        var elems = [document.getElementById('el'), document.getElementById('input')];
+
+        var data = {
+            value: 'hello!'
+        };
+
+        var command = {
+            text: function(str){
+                this.innerHTML = str;
+            },
+            value: function(str){
+                this.setAttribute('value', str);
+            }
+        };
+
+        // var scan = function(){        
+        //     /**
+        //      * 扫描带指令的节点属性
+        //      */
+        //     for(var i = 0, len = elems.length; i < len; i++){
+        //         var elem = elems[i];
+        //         elem.command = [];
+        //         for(var j = 0, len1 = elem.attributes.length; j < len1; j++){
+        //             var attr = elem.attributes[j];
+        //             if(attr.nodeName.indexOf('q-') >= 0){
+        //                 /**
+        //                  * 调用属性指令，这里可以使用数据改变检测
+        //                  */
+        //                 command[attr.nodeName.slice(2)].call(elem, data[attr.nodeValue]);
+        //                 // elem.command.push(attr.nodeName.slice(2));
+        //             }
+        //         }
+        //     }
+        // }
+
+        var scan = function(elems){        
+            /**
+             * 扫描带指令的节点属性
+             */
+            for(var i = 0, len = elems.length; i < len; i++){
+                var elem = elems[i];
+                elem.command = [];
+                for(var j = 0, len1 = elem.attributes.length; j < len1; j++){
+                    var attr = elem.attributes[j];
+                    if(attr.nodeName.indexOf('q-') >= 0){
+                        /**
+                         * 调用属性指令，这里可以使用数据改变检测
+                         */
+                        var dataKey = elem.getAttribute('ng-bind') || undefined;
+                        command[attr.nodeValue].call(elem, data[dataKey]);
+                        elem.command[attr.nodeValue] = data[dataKey];
+                    }
+                }
+            }
+        }
+
+        /**
+         * 设置数据后扫描
+         */
+        function mvSet(key, value){
+            data[key] = value;
+            scan();
+        }
+        /**
+         * 数据绑定监听
+         */
+        elems[1].addEventListener('keyup', function(e){
+            // mvSet('value', e.target.value);
+            data.value = e.target.value;
+            $digest(e.target.getAttribute('ng-bind'));
+        }, false);
+
+
+        //数据劫持--------------------------------------------------------------
+        var bValue;
+        /*
+            定义属性设置劫持
+        */
+        // var defineGetAndSet = function(obj,propName){
+        //     try{
+        //         Object.defineProperty(obj,propName,{
+        //             get: function(){
+        //                 return bValue
+        //             },
+        //             set: function(newValue){
+        //                 bValue = newValue;
+        //                 scan()
+        //             },
+        //             enumerable: true, // 可枚举
+        //             configurable: true // 属性可以被修改
+        //         })
+        //     }catch(error){
+        //         console.log('browser not supported')
+        //     }
+        // }
+        //-------------------------------------
+
+        //--脏值检测-------------------------------------------------
+
+        var digest = function(elems){
+            for(var i = 0, len = elems.length; i < len; i++){
+                var elem = elems[i];
+                for(var j = 0, len1 = elem.attributes.length; j < len1; j++){
+                    var attr = elem.attributes[j];
+                    if(attr.nodeName.indexOf('q-') >= 0){
+                        /**
+                         * 调用属性指令
+                         */
+                        var dataKey = elem.getAttribute('ng-bind') || undefined;
+
+                        /**
+                        * 进行脏数据检测，如果数据改变，则重新执行指令，否则跳过
+                        */
+                        if(elem.command[attr.nodeValue] !== data[dataKey]){
+             
+                            command[attr.nodeValue].call(elem, data[dataKey]);
+                            elem.command[attr.nodeValue] = data[dataKey];
+                        }
+                    }
+                }
+            }
+        }
+
+        function $digest(value){
+            var list = document.querySelectorAll('[ng-bind='+ value + ']');
+            digest(list);
+        }
+ 
+
+        //---------------
+
+        /*
+          初始化数据
+        */
+        scan(elems);
+
+        // defineGetAndSet(data,'value');
+
+        /**
+         * 改变数据更新视图
+         */
+        setTimeout(function(){
+            // mvSet('value', 'fuck');
+            data.value = 'fuck';
+            $digest('value');
+        },1000)
+
+    </script>
+</body>
+</html>

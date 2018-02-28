@@ -1,0 +1,53 @@
+28-Dec-2016 09:30:57.011 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.35
+28-Dec-2016 09:30:57.021 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          May 11 2016 21:57:08 UTC
+28-Dec-2016 09:30:57.021 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.35.0
+28-Dec-2016 09:30:57.021 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 8.1
+28-Dec-2016 09:30:57.021 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.3
+28-Dec-2016 09:30:57.021 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+28-Dec-2016 09:30:57.021 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             D:\Program Files\Java\jdk1.8.0_51
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_51-b16
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         D:\apache-tomcat-8.0.35
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         D:\apache-tomcat-8.0.35
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=D:/apache-tomcat-8.0.35/conf/logging.properties
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=D:/apache-tomcat-8.0.35/endorsed
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=D:/apache-tomcat-8.0.35
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=D:/apache-tomcat-8.0.35
+28-Dec-2016 09:30:57.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=D:/apache-tomcat-8.0.35/temp
+28-Dec-2016 09:30:57.023 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded APR based Apache Tomcat Native library 1.2.7 using APR version 1.5.2.
+28-Dec-2016 09:30:57.023 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+28-Dec-2016 09:30:57.521 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized (OpenSSL 1.0.2h  3 May 2016)
+28-Dec-2016 09:30:57.611 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-apr-8080"]
+28-Dec-2016 09:30:57.618 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-apr-8009"]
+28-Dec-2016 09:30:57.618 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 885 ms
+28-Dec-2016 09:30:57.641 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+28-Dec-2016 09:30:57.641 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.35
+28-Dec-2016 09:30:57.649 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\22canvas
+28-Dec-2016 09:30:57.951 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\22canvas has finished in 302 ms
+28-Dec-2016 09:30:57.952 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\docs
+28-Dec-2016 09:30:57.968 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\docs has finished in 15 ms
+28-Dec-2016 09:30:57.968 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\email
+28-Dec-2016 09:30:57.984 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\email has finished in 16 ms
+28-Dec-2016 09:30:57.984 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\examples
+28-Dec-2016 09:30:58.189 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\examples has finished in 205 ms
+28-Dec-2016 09:30:58.189 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\host-manager
+28-Dec-2016 09:30:58.208 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\host-manager has finished in 19 ms
+28-Dec-2016 09:30:58.209 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\html2canvas
+28-Dec-2016 09:30:58.220 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\html2canvas has finished in 12 ms
+28-Dec-2016 09:30:58.220 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\lottery
+28-Dec-2016 09:30:58.242 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\lottery has finished in 21 ms
+28-Dec-2016 09:30:58.242 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\mail
+28-Dec-2016 09:30:58.259 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\mail has finished in 17 ms
+28-Dec-2016 09:30:58.259 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\manager
+28-Dec-2016 09:30:58.295 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\manager has finished in 36 ms
+28-Dec-2016 09:30:58.295 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\portal
+28-Dec-2016 09:30:58.308 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\portal has finished in 13 ms
+28-Dec-2016 09:30:58.308 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\ROOT
+28-Dec-2016 09:30:58.325 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\ROOT has finished in 16 ms
+28-Dec-2016 09:30:58.325 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory D:\apache-tomcat-8.0.35\webapps\tenant
+28-Dec-2016 09:30:58.340 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory D:\apache-tomcat-8.0.35\webapps\tenant has finished in 15 ms
+28-Dec-2016 09:30:58.342 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
+28-Dec-2016 09:30:58.351 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
+28-Dec-2016 09:30:58.355 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 736 ms

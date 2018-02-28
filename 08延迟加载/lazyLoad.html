@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lazyload</title>
+	<style>
+		.img_box{width: 500px;margin:0 auto;}
+		img{height:200px;display: block;}
+	</style>
+</head>
+<body>
+	<div class="img_box" id="imgBox">
+		<img src="" data-src="img01.png" alt="">
+		<img src="" data-src="img02.png" alt="">
+		<img src="" data-src="img03.png" alt="">
+		<img src="" data-src="img04.png" alt="">
+		<img src="" data-src="img05.png" alt="">
+		<img src="" data-src="img06.png" alt="">
+		<img src="" data-src="img07.png" alt="">
+		<img src="" data-src="img08.png" alt="">
+		<img src="" data-src="img09.png" alt="">
+		<img src="" data-src="img10.png" alt="">
+	</div>
+
+	<script>
+	var W = window.innerWidth || document.documentElement.clientWidth;
+    var H = window.innerHeight || document.documentElement.clientHeight;
+    document.onmousewheel = function(){
+    	var imgList = document.getElementsByTagName('img');
+        for(var i=0;i<imgList.length;i++){
+            var rect = imgList[i].getBoundingClientRect();
+            if(rect.top>=0 && rect.left>=0 && rect.top<= H && rect.left<=W){
+                loadItem(imgList[i]);
+            }
+            console.log(rect.top);
+        }
+    }
+    function loadItem(ele){
+        var src = ele.getAttribute("data-src");
+        ele.setAttribute("src",src);
+    } 
+	</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fastclick</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<script src="zepto.min.js"></script>
+	<script src="fastclick.js"></script>
+	<style>
+		.click{width: 150px;height: 150px;background-color: blue;line-height: 50px;text-align: center;cursor: pointer;}
+	</style>
+</head>
+<body>
+	<div class="click">
+		<p>点击我</p>
+		<input type="text" value="我是点透君">
+	</div>
+	<script>
+	$(function(){
+		FastClick.attach(document.body);
+		$('.click').click(function(){
+			alert('为啥要戳我~~~');
+		});
+	})
+	</script>
+</body>
+</html>

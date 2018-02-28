@@ -1,0 +1,21 @@
+[ {
+  "catalogName" : "业务监控 BCC",
+  "catalogCode" : "030202",
+  "catalogTbname" : "h_product"
+}, {
+  "catalogName" : "操作自动化 OCC",
+  "catalogCode" : "030203",
+  "catalogTbname" : "h_product"
+}, {
+  "catalogName" : "视频质量诊断TCC",
+  "catalogCode" : "030205",
+  "catalogTbname" : "h_product"
+}, {
+  "catalogName" : "云虚拟化管理 VCC",
+  "catalogCode" : "030206",
+  "catalogTbname" : "h_product"
+}, {
+  "catalogName" : "应用性能监控 APM",
+  "catalogCode" : "030207",
+  "catalogTbname" : "h_product"
+} ]

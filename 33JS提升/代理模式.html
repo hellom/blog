@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>代理模式</title>
+</head>
+<body>
+		<input type="checkbox" id="1"></input>1
+		<input type="checkbox" id="2"></input>2
+		<input type="checkbox" id="3"></input>3
+		<input type="checkbox" id="4"></input>4
+		<input type="checkbox" id="5"></input>5
+		<input type="checkbox" id="6"></input>6
+		<input type="checkbox" id="7"></input>7
+		<input type="checkbox" id="8"></input>8
+		<input type="checkbox" id="9"></input>9
+</body>
+<script>
+	var myImage = (function(){
+		var imgNode = document.createElement('img');
+		document.body.appendChild(imgNode);
+
+		return {
+			setSrc: function(src){
+				imgNode.src = src;
+			}
+		}
+	})()
+
+	var proxyImage = (function(){
+		var img = new Image;
+		img.onload = function(){
+			console.log(this);
+			myImage.setSrc(this.src);
+		}
+		return{
+			setSrc: function(src){
+				setTimeout(()=>{
+					img.src = src;
+				},5000)
+				myImage.setSrc('加载中.....');
+				
+			}
+		}
+	})()
+
+	proxyImage.setSrc('https://images.uyun.cn/case_icon_2-1473323060218.jpg');
+
+
+	//模拟同步文件
+
+	var synchronousFiles = function(id){
+		console.log(id)
+	}
+
+	var checkboxNodes = document.getElementsByTagName('input');
+	for(var i = 0 , c ; c = checkboxNodes[i++] ; ){
+		c.onclick = function(){
+			if(this.checked === true){
+				proxySynchronousFiles(this.id);
+			}
+		}
+	}
+
+	var proxySynchronousFiles = (function(){
+
+		var cache = [] , timer;
+
+		return function(id){
+			cache.push(id);
+			if(timer){
+				return
+			}
+			timer = setTimeout(function(){
+				synchronousFiles( cache.join( ',' ));
+				clearTimeout( timer );
+				timer = null;
+				cache.length = 0; 
+			}, 2000 );
+		}
+
+	})()
+</script>
+</html>

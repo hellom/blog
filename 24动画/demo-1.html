@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo-1</title>
+	<style>
+		#block{
+			width: 200px;
+			height: 200px;
+			background: #ddd;
+			margin:0 auto;
+			margin-top: 200px;
+		}
+	</style>
+</head>
+<body>
+	<div id="block"></div>
+</body>
+
+<script>
+	var deg = 0;
+	var block = document.getElementById('block');
+	var animate = function(e){e()};
+	block.addEventListener('click',function(){
+			var self = this, startTime = Date.now(), duration = 1000;
+			// setInterval(function(){
+			// 	var p = (Date.now() - startTime) / duration;
+			// 	self.style.transform = 'rotate(' + (360*p) +'deg)'; 
+			// 	},1000/60)
+			// })
+			animate(function change(){
+				self.style.transform = 'rotate(' + (deg++) +'deg)'; 
+				if(deg <= 360){animate(change)};
+			})
+
+			distance = 200, T = 2000 , r = 100;
+			//2秒内匀速运动
+			requestAnimationFrame(function step(){
+				var p = Math.min(1.0, (Date.now() - startTime) / T);
+			    self.style.transform = 'translateX(' + (distance * p) +'px)';
+			    if(p < 1.0) requestAnimationFrame(step);
+			});
+
+			//斜线运动
+			requestAnimationFrame(function step(){
+		    var p = Math.min(1.0, (Date.now() - startTime) / T);
+		    var tx = distance * p;
+		    var ty = tx;
+
+		    self.style.transform = 'translate(' 
+		      + tx + 'px' + ',' + ty +'px)';
+		    if(p < 1.0) requestAnimationFrame(step);
+		    });
+
+		    //圆周运动
+		    requestAnimationFrame(function step(){
+		    var p = Math.min(1.0, (Date.now() - startTime) / T);
+		    var rotation = 360 * p;
+
+		    self.style.transformOrigin = '0 ' + r + 'px';
+		    self.style.transform = 'rotate(' 
+		      + rotation + 'deg)';
+		    if(p < 1.0) requestAnimationFrame(step);
+		    });
+		})
+
+</script>
+</html>

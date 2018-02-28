@@ -1,0 +1,82 @@
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "微软雅黑";
+}
+.container .outer-box {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  height: 538px;
+}
+.container .outer-box .inner-box {
+  width: 1920px;
+  position: absolute;
+  left: 50%;
+  margin-left: -960px;
+}
+.container .customer {
+  width: 1110px;
+  margin: 0 auto;
+  margin-top: 108px;
+}
+.container .customer ul {
+  width: 100%;
+  margin: 0 auto;
+}
+.container .customer ul li {
+  float: left;
+  width: 216px;
+  height: 158px;
+  margin-right: 82px;
+  position: relative;
+  margin-bottom: 100px;
+}
+.container .customer ul li img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.container .customer ul li:nth-child(4n) {
+  margin-right: 0;
+}
+.container .customer ul li:hover {
+  margin-top: -10px;
+}
+.container .contact {
+  width: 100%;
+  height: 122px;
+  background-color: #30ace0;
+  color: #fff;
+  font-size: 22px;
+  text-align: center;
+  line-height: 122px;
+}
+.container .apm-foot {
+  width: 100%;
+  height: 120px;
+  background-color: #30ace0;
+}
+.container .apm-foot .apm-foot-subwrap {
+  width: 1200px;
+  margin: 0 auto;
+  line-height: 120px;
+  font-size: 22px;
+  color: #fff;
+}
+.container .apm-foot .apm-foot-subwrap .message-btn {
+  display: block;
+  float: right;
+  margin-top: 30px;
+  width: 195px;
+  height: 60px;
+  background-color: #fff;
+  font-size: 20px;
+  color: #30ace0;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 30px;
+}

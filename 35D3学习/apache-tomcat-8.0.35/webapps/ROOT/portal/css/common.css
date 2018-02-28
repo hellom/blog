@@ -1,0 +1,241 @@
+.banner {
+  position: relative;
+}
+.banner .swiper-container {
+  width: 1920px;
+  height: 538px;
+}
+.banner .nav {
+  position: absolute;
+  z-index: 2;
+  left: 190px;
+}
+.banner .nav ul li {
+  float: left;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 23.5px 30px;
+  font-family: "微软雅黑";
+  color: #fff;
+  position: relative;
+}
+.banner .nav ul li a {
+  color: #fff;
+}
+.banner .nav .back {
+  background-color: #193c62;
+}
+.banner .nav .sub-nav {
+  position: absolute;
+  background-color: #fbfbfb;
+  top: 66px;
+  left: 0;
+  width: 580px;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+.banner .nav .sub-nav li {
+  height: 48px;
+  width: 270px;
+  padding: 0;
+  font-size: 14px;
+  color: #333333;
+  text-align: left;
+  padding-left: 20px;
+  line-height: 20px;
+  padding-top: 10px;
+  background-color: #fbfbfb;
+}
+.banner .nav .sub-nav li p {
+  font-size: 12px;
+  color: #717171;
+}
+.banner .nav .sub-nav li:hover {
+  color: #00a0e3;
+}
+.banner .logo {
+  position: absolute;
+  top: 19px;
+}
+.banner .login-box {
+  width: 305px;
+  position: absolute;
+  right: 0;
+  top: 23px;
+  z-index: 2;
+}
+.banner .login-box a {
+  display: block;
+  width: 95px;
+  height: 22px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: #fff;
+  float: left;
+  line-height: 22px;
+  text-align: center;
+}
+.banner .login-box .login {
+  border: 2px solid #fff;
+}
+.banner .login-box .logout {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  background-color: #193c62;
+  top: 66px;
+  right: 0;
+  line-height: 50px;
+  transition: all 1s;
+  display: none;
+}
+.banner .login-box .logout p {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+.banner .login-box .logout:hover {
+  background-color: #30ace0;
+}
+.banner .login-box .register {
+  background-color: #fff;
+  color: #729aa3;
+  height: 26px;
+  line-height: 26px;
+  margin-left: 10px;
+}
+.banner .login-box .console {
+  margin-top: 1px;
+  margin-right: 5px;
+}
+.banner .login-box .console img {
+  width: 16px;
+}
+.banner .login-box .username-wrap {
+  position: absolute;
+  left: 100px;
+  top: -23px;
+  height: 22px;
+  line-height: 22px;
+  padding: 24px 10px 21px 10px;
+  background-color: transparent;
+  display: none;
+}
+.banner .login-box .username-wrap img {
+  display: inline-block;
+  margin-bottom: 3px;
+}
+.banner .login-box .username-wrap img:last-child {
+  margin-top: 4px;
+  margin-left: 6px;
+}
+.banner .login-box .username-wrap .username {
+  color: #fff;
+  margin-left: 10px;
+  font-size: 12px;
+}
+.banner .toobar-box {
+  width: 100%;
+  position: absolute;
+  height: 66px;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  transition: all 0.3s ease-in;
+}
+.banner .toobar-box .toobar {
+  width: 1200px;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  margin-left: -600px;
+}
+.banner .toobar-box:hover {
+  background-color: #1f528c;
+  cursor: pointer;
+}
+.banner .mousewheel {
+  height: 66px;
+  position: fixed;
+  background-color: #1f528c;
+  transition: all .3s;
+  z-index: 999;
+}
+.about {
+  width: 100%;
+  background-color: #183459;
+  height: 312px;
+  position: relative;
+}
+.about .wrap {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.about .wrap ul {
+  float: left;
+  margin-left: 93px;
+  margin-top: 50px;
+}
+.about .wrap ul li {
+  font-size: 14px;
+  color: #959ead;
+  margin-bottom: 26px;
+}
+.about .wrap ul li a {
+  color: #959ead;
+}
+.about .wrap ul li a:hover {
+  color: #fff;
+}
+.about .wrap ul li .about-link,
+.about .wrap ul li .service-link {
+  color: #fff;
+}
+.about .wrap ul li:first-child {
+  font-size: 16px;
+  color: #fff;
+}
+.about .wrap .ewm {
+  position: absolute;
+  right: 100px;
+  top: 46px;
+}
+.about .wrap .ewm p {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+.about .wrap .ewm img {
+  width: 60%;
+}
+.about .footer {
+  width: 100%;
+  position: absolute;
+  height: 37px;
+  bottom: 0;
+  background-color: #142946;
+}
+.about .footer p {
+  width: 100%;
+  text-align: center;
+  color: #959ead;
+  font-size: 12px;
+  line-height: 37px;
+}
+.about .footer p .p1 {
+  margin-left: 59px;
+  margin-right: 73px;
+}
+.about .footer p .p2 {
+  margin-right: 90px;
+}
+@media screen and (max-width: 1200px) {
+  .container {
+    overflow: scroll;
+  }
+}

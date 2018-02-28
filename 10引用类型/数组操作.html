@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组操作</title>
+</head>
+<body>
+
+	<script>
+		//1.数组转字符串 toString()
+		var arr = [1,2,3];
+		var str = "123";
+		console.log(arr.toString());
+		console.log(arr.valueOf());
+		console.log(str.valueOf());
+		var test = 1;
+		//2.以自定义字符连接字符串
+		var arr1 = ['zhang','shang',undefined,'jin'];
+		console.log(arr1.join('-'));
+		//3.数组排序
+		var arr3 = [0,1,15,10,5];
+		function compare(v1,v2){
+			return v1-v2;
+		}
+		console.log(arr3.sort(compare));
+		//4.数组方法
+		var arr4 = ["zhang",'shang'];
+		console.log(arr4.concat('jin',['age','27'],{"age":27,"sex":"boy"}));
+		console.log(arr4.indexOf('shang'));
+		//迭代方法
+		var arr5 = [2,3,1,0,6,23,67];
+		arr5.forEach(function(item,index,array){
+			item++;
+		});
+		console.log(arr5);
+
+	</script>
+	
+</body>
+</html>

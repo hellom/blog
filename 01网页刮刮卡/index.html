@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>刮刮卡测试</title>
+<style type="text/css">
+	#bg{
+		background:url(img/flower.png);
+		width:204px;
+		height:104px;
+		margin-left:800px;;
+		margin-top:50px;
+		cursor:pointer;
+	}
+	body{
+		background-color:#CCC;
+	
+	}
+</style>
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		
+		var canvas=document.getElementById('myCanvas');
+		var ctx=canvas.getContext('2d');
+		ctx.fillStyle='#aaaaaa';	//设置覆盖层的颜色
+		ctx.fillRect(0,0,204,104);	//设置覆盖的区域
+		
+		//给整个页面绑定鼠标事件
+		$(this).on("mousedown",function(){
+			//点点击鼠标时即调用一次鼠标移动事件
+			mouseMove();
+			//当鼠标按下时激活鼠标移动监听
+			document.onmousemove = mouseMove; 
+		});
+		$(this).on("mouseup",function(){
+			//当鼠标按键弹起时取消鼠标移动监听
+			document.onmousemove = null; 
+		});
+		function mouseMove(ev) 
+		{ 
+			ev= ev || window.event; 
+			var mousePos = mouseCoords(ev); //获取全局坐标
+			var mouse = mouseOver(mousePos);
+			document.getElementById("show").value = mouse.x+":"+mouse.y; 		
+			var r=10;	//半径
+			for(var i=0;i<=r;i++){
+				//mouse.x++;
+				for(var j=0;j<=r;j++){
+					
+					var result1 = r*r - (i*i+j*j);
+					//document.getElementById("show2").value =result1; 
+					if(result1>=0){	
+						ctx.clearRect(mouse.x+i-9,mouse.y+j,1,1);
+						ctx.clearRect(mouse.x-i-9,mouse.y+j,1,1);
+						ctx.clearRect(mouse.x-i-9,mouse.y-j,1,1);
+						ctx.clearRect(mouse.x+i-9,mouse.y-j,1,1);
+					}
+				}
+			}
+		} 
+		/*清除canvas上指定坐标的像素*/
+		function clear(x,y){
+			ctx.clearRect(x,y,1,1);
+		}
+		/*获取鼠标当前坐标 --相对于页面*/
+		function mouseCoords(ev) 
+		{ 
+			if(ev.pageX || ev.pageY){ 
+				return {x:ev.pageX, y:ev.pageY}; 
+			} 
+			return { 
+			x:ev.clientX + document.body.scrollLeft - document.body.clientLeft, 
+			y:ev.clientY + document.body.scrollTop - document.body.clientTop 
+			};
+		} 
+		/*转换鼠标的坐标为相对于canvas*/
+		function mouseOver(ev1){
+			return {
+				x:ev1.x-800,
+				y:ev1.y-50
+			}
+		}
+	});
+
+</script>
+
+
+
+</head>
+
+<body >
+	<div id="bg">
+        <canvas id="myCanvas" width="204" height="104">
+        	您的浏览器不支持html5标签，您可以尝试换个浏览器。
+        </canvas>  	
+	</div>
+    <input id="show" type="text"/>
+    <input id="show2" type="text"/>
+</body>
+</html>

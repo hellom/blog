@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>testData.js</title>
+	<script src="./data.js"></script>
+</head>
+<body>
+	
+</body>
+<script>
+	
+	Data.sub('set', 'a', function (e) {console.log(e.data)});
+	Data.sub('set', 'b', function (e) {console.log(e.data)});
+	Data.set('a',1);
+	Data.set('b',2);
+
+	Data.get('a')
+
+</script>
+</html>

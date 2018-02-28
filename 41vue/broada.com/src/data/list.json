@@ -1,0 +1,45 @@
+{
+    "pName":"产品",
+    "menuObject":[
+        {
+            "secName":"管理工具",
+            "secMenu":[
+                {
+                    "catalogName":"网络监控 NCC",
+                    "catalogCode":"030201",
+                    "catalogTbname":"h_product"
+                },
+                {
+                    "catalogName":"业务监控 BCC",
+                    "catalogCode":"030202",
+                    "catalogTbname":"h_product"
+                },
+                {
+                    "catalogName":"操作自动化 OCC",
+                    "catalogCode":"030203",
+                    "catalogTbname":"h_product"
+                }
+            ]
+        },
+        {
+            "secName":"管理工具",
+            "secMenu":[
+                {
+                    "catalogName":"网络监控 NCC",
+                    "catalogCode":"030201",
+                    "catalogTbname":"h_product"
+                },
+                {
+                    "catalogName":"业务监控 BCC",
+                    "catalogCode":"030202",
+                    "catalogTbname":"h_product"
+                },
+                {
+                    "catalogName":"操作自动化 OCC",
+                    "catalogCode":"030203",
+                    "catalogTbname":"h_product"
+                }
+            ]
+        }
+    ]
+}

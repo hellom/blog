@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>500</title>
+	<link rel="icon" href="./images/title-logo.png" type="image/x-icon"/>
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/error.css">
+</head>
+<body>
+	<div class="error-wrap" id='error'>
+		<div class="big-logo"></div>
+		<div class="error-info">
+			<img src="./images/500.png" alt="">
+			<p class="error-text">内部服务器错误，你打开的内容可能存在问题，无法显示</p>
+			<div class="error-btn">
+				<a href="javascript:history.go(-1);" class="button fl">返回上一级</a>
+				<a href="./index.html" class="button fr">返回首页</a>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	var errorWrap = document.getElementById('error');
+	var windowWidth = document.documentElement.clientHeight;
+	errorWrap.style.height = windowWidth + "px";
+</script>
+</html>

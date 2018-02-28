@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+	
+		<title>优云</title>
+		<style type="text/css">
+			html { font-family:"Microsoft Yahei", “Helvetica Neue”, Helvetica, STHeiTi, Arial, sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+			.clearfix:after{ content:"."; display:block; height:0; clear:both; visibility:hidden; font-size:0; line-height:0; overflow: hidden;}
+			a{text-decoration: none;}
+			ul li{list-style: none;}
+			* {
+			  margin: 0;
+			  padding: 0;
+			}
+			img{
+				width: 100%;
+			}
+			#container{
+				max-height: 800px;
+				color: #FFFFFF;
+			}
+			#container #top {
+			  width: 800px;
+			  height: 218px;
+			  background: url(../img/images/logo_02.jpg) no-repeat;
+			  position: relative;
+			  margin: 0 auto;
+			}
+			#container #top h3 {
+			  color: #fff;
+			  position: absolute;
+			  top: 100px;
+			  left: 64px;
+			}
+			#container #second {
+			  background-color: #4b78aa;
+			  width: 800px;
+			  height: 388px;
+			  margin-top: 10px;
+			  margin: 0 auto;
+			}
+			#container #second .left {
+			  width: 442px;
+			  height: 388px;
+			  float: left;
+			}
+			#container #second .left ul {
+			  margin-left: 64px;
+			  margin-top: 96px;
+			}
+			#container #second .left ul li:nth-child(1) {
+			  font-size: 20px;
+			  margin-bottom: 28px;
+			}
+			#container #second .left ul li:nth-child(2) h3 b {
+			  font-size: 24px;
+			}
+			#container #second .left ul li:nth-child(3) {
+			  font-size: 12px;
+			  margin-top: 42px;
+			}
+			#container #second .right img {
+			  width: 270px;
+			  height: 156px;
+			  margin-top: 82px;
+			}
+			#container #second .right button {
+			  width: 150px;
+			  height: 38px;
+			  background-color: #5e95d3;
+			  border: none;
+			  border-radius: 40px;
+			  color: #fff;
+			  font-size: 16px;
+			  margin: 26px 60px;
+			}
+			#container #third {
+			  width: 800px;
+			  height: 494px;
+			  background-color: #4B78AA;
+			  margin-top: 10px;
+			  margin: 0 auto;
+			}
+			#container #third h3 {
+			  padding: 54px 0 30px 64px;
+			  width: 664px;
+			  font-size: 26px;
+			}
+			#container #third .left {
+			  width: 506px;
+			  float: left;
+			}
+			#container #third .left ul {
+			  margin-left: 64px;
+			}
+			#container #third .left ul li {
+			  margin-bottom: 12px;
+			  padding: 22px 0;
+			}
+			#container #third .left ul li span {
+			  font-size: 12px;
+			}
+			#container #third .right {
+			  width: 262px;
+			  float: right;
+			}
+			#container #third .right ul {
+			  margin-left: -60px;
+			}
+			#container #third .right ul li {
+			  margin-bottom: 12px;
+			}
+			#container #third .right ul li img {
+			  width: 190px;
+			  height: 106px;
+			}
+			#container #four {
+			  width: 800px;
+			  height: 348px;
+			  margin-top: 10px;
+			  background-color: #4B78AA;
+			  position: relative;
+			  margin: 0 auto;
+			}
+			#container #four ul {
+			  padding: 48px 0 0 64px;
+			}
+			#container #four ul li {
+			  margin-bottom: 32px;
+			  font-size: 12px;
+			}
+			#container #four ul li h3 {
+			  font-size: 20px;
+			}
+			#container #four ul li span {
+			  font-size: 16px;
+			}
+			#container #four img {
+			  display: block;
+			  width: 244px;
+			  height: 240px;
+			  position: absolute;
+			  top: 56px;
+			  right: 52px;
+			}
+			#container #footer {
+			  width: 800px;
+			  height: 260px;
+			  background-color: #000f38;
+			  margin-top: 10px;
+			  position: relative;
+			  margin: 0 auto;
+			}
+			#container #footer img {
+			  display: block;
+			  width: 140px;
+			  height: 140px;
+			  position: absolute;
+			  top: 60px;
+			  left: 64px;
+			}
+			#container #footer ul {
+			  width: 500px;
+			  float: right;
+			  padding-top: 72px;
+			}
+			#container #footer ul li {
+			  margin-bottom: 10px;
+			  font-size: 14px;
+			}
+			#container #footer ul li:nth-child(3) {
+			  color: #41aaeb;
+			  font-size: 24px;
+			}
+			#container #footer ul li:nth-child(4) {
+			  color: #215d92;
+			  font-size: 12px;
+			}
+			#container #bottom {
+			  width: 800px;
+			  height: 48px;
+			  background-color: #2e455f;
+			  text-align: center;
+			  line-height: 48px;
+			  margin: 0 auto;
+			}
+
+
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/email.css"/>
+	</head>
+	<body>
+		<a href="https://uyun.cn" target="_blank">
+		<div id="container">
+			<div id="top">
+				<h3>全栈双态运维实践者<br />企业级运维专家</h3>
+			</div>
+			<div id="second">
+				<div class="left">
+					<ul>
+						<li>就体验打不开新局面</li>
+						<li><h3><b>Monitor</b> 唤醒新世界</h3></li>
+						<li>优云Monitor是面向混合云架构的下一代云监控产品，采用互<br />联网技术的采集微代理，结合大数据分析和可视化技术，形成自<br />动化、规模化、可视化的敏捷检测产品。</li>
+					</ul>
+				</div>
+				<div class="right">
+					<img src="img/01.jpg"/>
+					<button>点击立即体验</button>
+				</div>
+			</div>
+			<div id="third">
+				<h3>热门解决方案被广泛应用于20多个行业数千家用户</h3>
+				<div class="left">
+					<ul>
+						<li>
+							<h4>国家部委</h4>
+							<span>提供从IT可用到服务可用的保障性护航计划，助理政府部门向服务型<br />组织快速转型</span>
+						</li>
+						<li>
+							<h4>企业集团</h4>
+							<span>提供了基于SAAS模式的经济高效、以易使用、以扩展、快速部署和管<br />理的云上运维解决方案</span>
+						</li>
+						<li>
+							<h4>平安城市</h4>
+							<span>面向通信考核、视频监控管理、警务云提供了一体化的运维管理解决<br />方案</span>
+						</li>
+					</ul>
+				</div>
+				<div class="right">
+					<ul>
+						<li><img src="img/02.jpg"/></li>
+						<li><img src="img/03.jpg"/></li>
+						<li><img src="img/04.jpg"/></li>
+					</ul>
+				</div>
+			</div>
+			<div id="four">
+				<ul>
+					<li><h3>了解优云</h3></li>
+					<li>优云（www.uyun.cn）是广通软件旗下的新一代敏捷运维<br />创新品牌，诞生于云计算、大数据和物联网的变革时代，企<br />业面临着数字化和“物联网+”转型的双重挑战。</li>
+					<li>优云的混合运维架构融合了双态并存的设计理念。<br />
+						<span>稳态：</span>基于ITIL运维实践，保持核心竞争力的稳定；<br />
+						<span>敏态：</span>基于DevOps的运维开发理念，满足业务模式创新<br />的灵活和高效，帮助用户赢得业务的持续成功。
+					</li>
+				</ul>
+				<img src="img/uyun.jpg"/>
+			</div>
+			<div id="footer">
+				<img src="img/erweima.jpg"/>
+				<ul>
+					<li>欢迎关注&nbsp;优云官方微信</li>
+					<li>理解最新互联网运维技术；参与社区热门话题讨论！</li>
+					<li>www.uyun.cn</li>
+					<li>点击立即体验</li>
+				</ul>
+			</div>
+			<div id="bottom">
+				杭州优云软件有限公司
+			</div>
+		</div>
+		</a>
+	</body>
+</html>

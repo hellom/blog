@@ -1,0 +1,246 @@
+.banner{
+		position: relative;
+		.swiper-container{
+			width: 1920px;
+			height: 538px;
+		}
+		.nav{
+			position: absolute;
+			z-index: 2;
+			left: 190px;
+			ul li{
+				float: left;
+				font-size: 14px;
+				cursor: pointer;
+				padding:23.5px 30px;
+				font-family: "微软雅黑";
+				color: #fff;
+				position: relative;
+				a{
+					color: #fff;
+				}
+			}
+			.back{
+				background-color: #193c62;
+			}
+			.sub-nav{
+				position: absolute;
+				background-color: #fbfbfb;
+				top:66px;
+				left:0;
+				width:580px;
+				// height: 174px;
+				height: 0;
+				overflow: hidden;
+				transition:all 0.5s;
+				li{
+					height: 48px;
+					width: 270px;
+					padding:0;
+					font-size:14px;
+					color: #333333;
+					text-align: left;
+					padding-left: 20px;
+					line-height: 20px;
+					padding-top: 10px;
+					background-color: #fbfbfb;
+					p{
+						font-size: 12px;
+						color: #717171;
+					}
+				}
+				li:hover{
+					color:#00a0e3;
+				}
+			}
+		}
+		.logo{
+			position: absolute;
+			top:19px;
+		}
+		.login-box{
+			width: 305px;
+			position: absolute;
+			right: 0;
+			top:23px;
+			z-index: 2;
+			a{
+				display: block;
+				width: 95px;
+				height: 22px;
+				border-radius: 14px;
+				font-size: 14px;
+				color: #fff;
+				float: left;
+				line-height: 22px;
+				text-align: center;
+			}
+			.login{
+				border:2px solid #fff;
+			}
+			.logout{
+				position: absolute;
+				width: 100%;
+				height: 50px;
+				background-color: #193c62;
+				// top:30px;
+				top:66px;
+				right:0;
+				line-height: 50px;
+				transition:all 1s;
+				display: none;
+				p{
+					text-align: center;
+					width: 100%;
+					height: 100%;
+					color: #fff;
+				}
+			}
+			.logout:hover{
+				background-color: #30ace0;
+			}
+			.register{
+				background-color: #fff;
+				color: #729aa3;
+				height: 26px;
+				line-height: 26px;
+				margin-left: 10px;
+			}
+			.console{
+				margin-top: 1px;
+				margin-right: 5px;
+				img{
+					width: 16px;
+				}
+			}
+			.username-wrap{
+				position: absolute;
+			    left: 100px;
+			    top: -23px;
+			    height: 22px;
+			    line-height: 22px;
+			    padding: 24px 10px 21px 10px;
+			    background-color: transparent;
+				display: none;
+				img{
+					display: inline-block;
+					margin-bottom: 3px;
+				}
+				img:last-child{
+					margin-top: 4px;
+					margin-left: 6px;
+				}
+				.username{
+					color: #fff;
+					margin-left: 10px;
+					font-size: 12px;
+				}
+			}
+		}
+		.toobar-box{
+			width: 100%;
+			position: absolute;
+			height: 66px;
+			z-index: 2;
+			top:0;
+			left:0;
+			transition:all .3s ease-in;
+			.toobar{
+				width: 1200px;
+				position: absolute;
+				z-index: 2;
+				top:0;
+				left: 50%;
+				margin-left: -600px;
+				
+			}
+		}
+		.toobar-box:hover{
+			background-color: #1f528c;
+			cursor: pointer;
+		}
+		.mousewheel{
+			height: 66px;
+			position: fixed;
+			background-color: #1f528c;
+			transition:all .3s;
+			z-index: 999;
+		}
+	}
+
+
+	.about{
+		width: 100%;
+		background-color: #183459;
+		height: 312px;
+		position: relative;
+		.wrap{
+			width: 1200px;
+			margin:0 auto;
+			position: relative;
+			ul{
+				float: left;
+				margin-left: 93px;
+				margin-top: 50px;
+				li{
+					font-size: 14px;
+					color: #959ead;
+					margin-bottom: 26px;
+					a{
+						color: #959ead;
+					}
+					a:hover{
+						color: #fff;
+					}
+					.about-link,.service-link{
+						color:#fff;
+					}
+				}
+				li:first-child{
+					font-size: 16px;
+					color: #fff;
+				}
+			}
+			.ewm{
+				p{
+					font-size: 16px;
+					color: #fff;
+					margin-bottom: 10px;
+					margin-left: 30px;
+				}
+				position: absolute;
+				right: 100px;
+				top:46px;
+				img{
+					width: 60%;
+				}
+			}
+		}
+		.footer{
+			width: 100%;
+			position: absolute;
+			height: 37px;
+			bottom: 0;
+			background-color: #142946;
+			p{
+				width: 100%;
+				text-align: center;
+				color: #959ead;
+				font-size: 12px;
+				line-height: 37px;
+				.p1{
+					margin-left: 59px;
+					margin-right: 73px;
+				}
+				.p2{
+					margin-right: 90px;
+				}
+			}
+		}
+	}
+
+@media screen and (max-width: 1200px){
+	.container{
+		overflow: scroll;
+	}
+}

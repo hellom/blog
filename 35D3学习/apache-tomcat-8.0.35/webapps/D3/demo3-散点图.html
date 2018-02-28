@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo3</title>
+	<script src='./d3.min.js'></script>
+</head>
+<body>
+
+<style>
+.axis path,
+.axis line{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+ 
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+</style>
+	
+</body>
+<script>
+	
+
+	var width = 400;
+	var height = 400;
+	var svg = d3.select('body').append('svg').attr("width",width).attr("height",height);
+	var padding = {top:20,right:20,bottom:20,left:20};
+
+	//初始数据
+	var center = [[0.5,0.5],[0.7,0.8],[0.4,0.9],[0.11,0.32],[0.88,0.25],[0.4,0.1],[0.1,0.2],[0.05,0.1],[0.7,0.8],[0.75,0.9]];
+
+	//比例尺
+	var xAxisWidth = 350;
+	var yAxisWidth = 350;
+
+	var xScale = d3.scale.linear().domain([0,1.2*d3.max(center,function(d){
+		return d[0]
+	})]).range([0,xAxisWidth]);
+
+	console.log(xScale(0.7))
+
+	var yScale = d3.scale.linear().domain([0,1.2*d3.max(center,function(d){
+		return d[1]
+	})]).range([0,yAxisWidth]);
+
+
+	//绘制圆
+	var circle = svg.selectAll('.circle').data(center).enter().append('circle').attr('fill','blue').attr('cx',function(d){
+		return padding.left + xScale(d[0])
+	}).attr('cy',function(d){
+		return height - padding.bottom - yScale(d[1])
+	}).attr('r',5);
+
+	//绘制坐标轴
+	var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
+	var yAxis = d3.svg.axis().scale(yScale).orient('left');
+	svg.append('g').attr('class','axis').attr('transform',"translate("+padding.left+","+(height-padding.bottom)+")").call(xAxis);
+
+	yScale.range([yAxisWidth,0]);
+
+	svg.append('g').attr('class','axis').attr('transform',"translate("+padding.top+","+36+")").call(yAxis);
+	svg.append('g').call(yAxis);
+
+
+
+
+	
+
+</script>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tinyReact</title>
+</head>
+<body>
+	<div id="container"></div>
+</body>
+<script>
+	
+	/// tiny react lib start
+    function renderVDOM(vnode) {
+        if(typeof vnode == "string") {
+            return vnode
+        } else if(typeof vnode.nodeName == "string") {
+            let result = {
+                nodeName: vnode.nodeName,
+                props: vnode.props,
+                children: []
+            }
+            for(let i = 0; i < vnode.children.length; i++) {
+                result.children.push(renderVDOM(vnode.children[i]))
+            }
+            return result
+        } else if (typeof vnode.nodeName == "function") {
+            let func = vnode.nodeName
+            let inst = new func(vnode.props)
+            let innerVnode = func.prototype.render.call(inst)
+            return renderVDOM(innerVnode)
+        }
+    }
+    function createElement(comp, props, ...args) {
+        let children = []
+        for(let i = 0; i< args.length;i++){
+            if(args[i] instanceof Array) {
+                children = children.concat(args[i])
+            } else {
+                children.push(args[i])
+            }
+        }
+        return {
+            nodeName: comp,
+            props: props || {},
+            children
+        }
+    }
+    React = {}
+    React.createElement = createElement
+    class Component {
+        constructor(props) {
+            this.props = props
+        }
+        setState(state){
+
+            setTimeout(() => {
+                this.state = state;
+                const vnode = this.render();
+                let olddom = getDOM(this);
+                render(vnode,olddom.parentNode,this,olddom)
+            },0)
+        }
+    }
+
+    function getDOM(comp) {
+        let rendered = comp.__rendered
+        while (rendered instanceof Component) { //判断对象是否是dom
+            rendered = rendered.__rendered
+        }
+        return rendered
+    }
+
+
+    React.Component = Component
+
+    /// tiny react lib end
+
+    class Grandson extends Component {
+        render() {
+            return React.createElement('div', null, "i am grandson")
+        }
+    }
+    class Son extends Component {
+        render() {
+            return React.createElement(Grandson)
+        }
+    }
+    class Father extends Component {
+        render() {
+            return React.createElement(Son)
+        }
+    }
+
+    const vv = renderVDOM(React.createElement(Father))
+    console.log("vv:", vv)
+
+    function render(vnode,parent,comp,olddom){
+        let dom;
+        if(typeof vnode == 'string'){
+            dom = document.createTextNode(vnode);
+            comp && (comp.__rendered = dom);
+            parent.appendChild(dom);
+            if(olddom) {
+                parent.replaceChild(dom, olddom)
+            } else {
+                parent.appendChild(dom)
+            }
+        }else if(typeof vnode.nodeName == 'string'){
+            dom = document.createElement(vnode.nodeName);
+            comp && (comp.__rendered = dom);
+            setAttrs(dom,vnode.props);
+            if(olddom) {
+                parent.replaceChild(dom, olddom)
+            } else {
+                parent.appendChild(dom)
+            }
+            for(let i= 0; i< vnode.children.length;i++){
+                render(vnode.children[i],dom,null,null)
+            }
+        }else if(typeof vnode.nodeName == 'function'){
+            let func = vnode.nodeName;
+            let inst = new func(vnode.props);
+            comp && (comp.__rendered = inst)
+            let innerVnode = inst.render(inst);
+            render(innerVnode,parent,inst,olddom)
+        }
+    }
+
+    function setAttrs(dom,props){
+        const allKeys = Object.keys(props);
+        allKeys.forEach(k => {
+            const v = props[k];
+            if(k == 'className'){
+                dom.setAttribute('class',v)
+                return
+            }
+            if(k == 'style'){
+                if(typeof v == 'string'){
+                    dom.style.cssText = v
+                }
+                if(typeof v == 'object'){
+                    for(let i in v){
+                        dom.style[i] = v[i]
+                    }
+                }
+                return
+            }
+            if(k[0] == 'o' && k[1] == 'n'){
+                const capture = (k.indexOf('Capture')!= -1);
+                dom.addEventListener(k.substring(2).toLowerCase(),v,capture);
+                return
+            }
+            dom.setAttribute(k,v)
+        })
+    }
+
+    class HelloWorld extends Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                color: 'red'
+            }
+        }
+        handleClick(){
+            this.setState({
+                color: 'blue'
+            })
+        }
+        render() {
+            return React.createElement('div',{ style: { 'color': this.state.color }, onClick: this.handleClick.bind(this) },'HelloWorld') 
+        }
+    }
+
+
+    render(React.createElement(HelloWorld), document.getElementById("container"))
+</script>
+</html>

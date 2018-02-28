@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双向绑定</title>
+	<script src='jquery.js'></script>
+</head>
+<body>
+	<input type="number" data-bind-123="name" />   
+</body>
+<script>
+	function observe(data){
+		if(!data || typeof data !== 'object'){
+			return
+		}
+		Object.keys(data).forEach(function(key){
+			defineReactive(data, key, data[key])
+		})
+	}
+
+	function defineReactive(data, key, val){
+		var dep = new Dep();
+		observe(val);
+		Object.defineProperty(data, key, {
+			enumerable: true,
+			configurable: false,
+			get: function(){
+				Dep.target && dep.addDep(Dep.target);
+				return val
+			},
+			set: function(newVal){
+				console.log(val,'--->',newVal);
+				val = newVal;
+				dep.notify();//通知所有订阅者
+			}
+		})
+	}
+
+	function Dep(){
+		this.subs = []
+	}
+
+	Dep.prototype = {
+		addSub: function(sub){
+			this.subs.push(sub);
+		},
+		notify: function(){
+			this.subs.forEach(function(sub){
+				sub.update()
+			})
+		}
+	}
+
+	function Watcher(vm,expOrfn,cb){
+		this.cb = cb;
+		this.vm = vm;
+		this.expOrfn = expOrfn;
+		this.depIds = {};
+		this.value = this.get();
+	}
+
+	Watcher.prototype = {
+		get: function(key){
+			Dep.target = this;
+			this.value = data[key];
+			Dep.target = null
+		}
+	}
+ 
+	var data = {name: 'zhang'};
+	observe(data);
+	data.name = 'shang';
+
+	
+
+</script>
+</html>

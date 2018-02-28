@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fullPage</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 100%;
+			overflow: hidden;
+			position: relative;
+			background: #ddd;
+		}
+		.box{
+			position: absolute;
+			width: 100%;
+		}
+		.box1{
+			background-color: green;
+			width: 100%;
+		}
+		.box2{
+			background-color: yellow;
+			width: 100%;
+		}
+		.box3{
+			background-color: blue;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container" id="container">
+		<div class="box" id="box">
+			<div id="box1" class="box1">box1</div>
+			<div id="box2" class="box2">box2</div>
+			<div id="box3" class="box3">box3</div>
+		</div>
+	</div>
+
+	<script>
+		//获取浏览器视口的高度
+		var innerHeight = document.documentElement.clientHeight;
+		//获取元素，分别为元素设置高度
+		var container = document.getElementById("container");
+		var box = document.getElementById("box");
+		var box1 = document.getElementById("box1");
+		var box2 = document.getElementById("box2");
+		var box3 = document.getElementById("box3");
+		container.style.height = innerHeight + "px";
+		box.style.height = innerHeight * 3 + "px";
+		box1.style.height = innerHeight + "px";
+		box2.style.height = innerHeight + "px";
+		box3.style.height = innerHeight + "px";
+		//鼠标滚动触发box滚动
+		var EventUtil = {
+		    addHandler: function(element, type, handler){
+		        if (element.addEventListener){
+		            element.addEventListener(type, handler, false);
+		        } else if (element.attachEvent){
+		            element.attachEvent("on" + type, handler);
+		        } else {
+		            element["on" + type] = handler;
+		        }
+		    },
+		    getEvent: function(event){
+		        return event ? event : window.event;
+		    },
+		    getWheelDelta: function(event){
+		        if (event.wheelDelta){
+		            return (client.engine.opera && client.engine.opera < 9.5 ? -event.wheelDelta : event.wheelDelta);
+		        } else {
+		            return -event.detail * 40;
+		        }
+		    }
+		}
+		var index = 1;
+		EventUtil.addHandler(document,"mousewheel",function(event){
+			var event = EventUtil.getEvent(event);
+			if(event.wheelDelta < 0){
+				index == 3 ? index = 1 : index++;
+				scrollBox(-innerHeight);
+			}else{
+				index == 1 ? index = 3 : index--;
+				scrollBox(-innerHeight);
+			}
+			
+		});
+		EventUtil.addHandler(document,"DOMMouseScroll",function(event){
+			var event = EventUtil.getEvent(event);
+			if(event.detail > 0){
+				index == 3 ? index = 1 : index++;
+				scrollBox(-innerHeight);
+			}else{
+				index == 1 ? index = 3 : index--;
+				scrollBox(-innerHeight);
+			}
+			
+		});
+		function scrollBox(innerHeight){
+			var top = box.style.top;
+			innerHeight = (index-1) * innerHeight;
+			box.style.top = innerHeight + "px";
+		}
+	</script>
+</body>
+</html>

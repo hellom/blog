@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>重温underscore</title>
+</head>
+<body>
+	<script>
+		;(function(){
+			var root = this;
+			//支持面向oop的方式调用-------------
+			var _ = function(obj){
+				if(obj instanceof _){
+					return obj;
+				}
+				if(!(this instanceof _)){
+					return new _(obj);
+				}
+				this._wrapped = obj;
+			}
+
+			_.functions = _.methods = function(obj){
+				var names = [];
+				for( var key in obj){
+					if(_.isFunction(obj[key])) names.push(key);
+				}
+				return names.sort();
+			}
+
+			_.map = _.collect = function(obj){return obj};
+			_.each = _.forEach = function(){};
+
+			_.isFunction = function(obj){
+				return typeof obj == 'function' || false;
+			}
+
+			_.mixin = function(obj){
+				// _.each(_.functions(obj),function(name){
+				// 	var func = _[name] = obj[name];
+				// 	_.prototype[name] = function(){
+				// 		var args = [this._wrapped];
+				// 		push.apply(args,arguments);
+				// 		return result(this,func.apply(_,args));
+				// 	}
+				// })
+				(_.functions(obj)).map(function(name){
+					var func = _[name] = obj[name];
+					_.prototype[name] = function(){
+						var args = [this._wrapped];
+
+						// push.apply(args, arguments);
+						args.push(arguments);
+						return result(this,func.apply(_,args));
+					}
+				})
+			}
+
+			var result = function(instance, obj){
+				return instance._chain ? _(obj).chain() : obj
+			}
+
+			_.mixin(_);
+			console.log(_([1,2]).map())
+			/////////////////////---------------------
+
+			var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
+			var
+		    push             = ArrayProto.push,
+		    slice            = ArrayProto.slice,
+		    toString         = ObjProto.toString,
+		    hasOwnProperty   = ObjProto.hasOwnProperty;
+
+			_.isObject = function(obj){
+				var type = typeof obj;
+				return type === 'function' || type === 'object' && !!obj;
+			}
+
+			_.allKeys = function(obj){
+				if(!_.isObject(obj)) return [];
+				var keys = [];
+				for ( var key in obj) keys.push(key);
+				return keys;
+			}
+
+			var createAssigner = function(keysFunc, undefinedOnly){
+				return function(obj) {
+					var length = arguments.length;
+					if(length < 2 || obj === null) return obj;
+					for( var index = 1; index < length; index++){
+						var source = arguments[index], keys = keysFunc(source),
+							l = keys.length;
+						for(var i = 0; i < l; i++){
+							var key = keys[i];
+							if(!undefinedOnly || obj[key] === void 0){
+								obj[key] = source[key]
+							}
+						}
+					}
+					return obj;
+				}
+			}
+
+			_.extend = createAssigner(_.allKeys);
+
+			_.invoke = function(obj,method){
+				var args = slice.call(arguments,2)
+				var isFunc = _.isFunction(method);
+				return obj.map(function(value){
+					var func = isFunc ? method : value[method];
+					return func == null ? func : func.apply(value, args)
+				})
+			}
+
+			// console.log(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort'))
+
+			var property = function(key) {
+			    return function(obj) {
+			      return obj == null ? void 0 : obj[key];
+			    };
+			};
+			_.property = property;
+			console.log(_.property('name'))
+
+			_.random = function(min, max) {
+			    if (max == null) {
+			      max = min;
+			      min = 0;
+			    }
+			    return min + Math.floor(Math.random() * (max - min + 1));
+			};
+
+			_.shuffle = function(obj){
+				var length = obj.length;
+				var shuffled = obj.concat();
+				for (var i = length - 1 , rand; i >= 0; i--) {
+					rand = _.random(0,i);
+					var temp = shuffled[i];
+					shuffled[i] = shuffled[rand];
+					shuffled[rand] = temp
+				}
+				return shuffled
+			}
+
+			console.log(_.shuffle([1,2,3,4,5,6]))
+
+		}.call(this))
+	</script>
+</body>
+</html>

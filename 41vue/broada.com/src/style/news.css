@@ -1,0 +1,43 @@
+.newsHeader {
+  height: 1.08rem;
+  position: relative;
+  background-color: #ebebeb;
+}
+.newsHeader h1 {
+  height: 1.08rem;
+  line-height: 1.08rem;
+  text-align: center;
+  margin: 0 0.4rem;
+  font-size: 0.4rem;
+  color: #4d4e4e;
+}
+.newsHeader .more {
+  width: 0.33rem;
+  position: absolute;
+  top: 0.45rem;
+  right: 0.4rem;
+}
+.newsTitle {
+  margin: 0.6rem 0.4rem;
+}
+.newsTitle h2 {
+  text-align: center;
+  color: #4d4e4e;
+  font-size: 0.34rem;
+}
+.newsTitle h3 {
+  margin-top: 0.45rem;
+  text-align: right;
+  font-size: 0.24rem;
+  color: #909090;
+  margin-right: 0.2rem;
+}
+.newsDetailWrap .contentWrap p {
+  font-size: 0.3rem;
+  color: #4d4e4e;
+  line-height: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.newsDetailWrap .contentWrap img {
+  width: 100%;
+}

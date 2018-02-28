@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>motion</title>
+	<style>
+		
+		.toggle-slider{
+			width: 500px;
+			height: 200px;
+			background: #ddd;
+		}
+		.toggle-box{
+			width: 100px;
+			height: 200px;
+			background: red
+		}
+	</style>
+</head>
+<body>
+	
+</body>
+<script>
+	
+	const render = x => `
+    <div class="toggle-slider">
+        <div class="toggle-box" style="transform: translate3d(${x}px, 0, 0)">
+    </div>
+`
+
+const cal = (beginX, endX, duration, beginTime) => {
+    const now = Date.now();
+    const passedTime = now - beginTime;
+
+    return (endX - beginX) / duration * passedTime + beginX;
+}
+
+const beginX = 0;
+const endX = 300;
+const duration = 5000;
+const frameTime = 1000 / 60;
+
+let beginTime = Date.now();
+
+const startAnimation = () => {
+    const currX = cal(beginX, endX, duration, beginTime);
+
+    if(currX > 1000){
+    	return
+    }
+
+    document.body.innerHTML = render(currX);
+
+    setTimeout(startAnimation, frameTime);
+}
+
+startAnimation(0);
+</script>
+</html>

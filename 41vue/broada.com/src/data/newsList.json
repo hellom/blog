@@ -1,0 +1,36 @@
+[ {
+  "id" : 365,
+  "catalog" : "新闻",
+  "title" : "广通”一库四中心”运维体系在2016全国石油石化研讨会广获认同",
+  "description" : null,
+  "date" : "2016-01-18",
+  "content" : null
+}, {
+  "id" : 364,
+  "catalog" : "产品",
+  "title" : "﻿﻿﻿﻿﻿﻿﻿﻿持续交付的Mesos与Docker导入篇",
+  "description" : null,
+  "date" : "2016-01-05",
+  "content" : null
+}, {
+  "id" : 363,
+  "catalog" : "新闻",
+  "title" : "广通软件技术认证体系建设动态",
+  "description" : null,
+  "date" : "2016-01-04",
+  "content" : null
+}, {
+  "id" : 361,
+  "catalog" : "行业",
+  "title" : "敏捷运维，数字化背后的机遇",
+  "description" : null,
+  "date" : "2015-12-22",
+  "content" : null
+}, {
+  "id" : 362,
+  "catalog" : "行业",
+  "title" : "﻿﻿浅谈运维平台选型，提速DevOps运维",
+  "description" : null,
+  "date" : "2015-12-22",
+  "content" : null
+} ]

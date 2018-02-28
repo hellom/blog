@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>jQuery Slot Machine</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="dist/jquery.slotmachine.css" type="text/css" media="screen" />
+
+		<script type="text/javascript" src="./libs/jquery/jquery.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="dist/jquery.slotmachine.js"></script> -->
+		<link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="jquery.slotmachine.css">
+        <script src="jquery.js" charset="utf-8"></script>
+        <script src="jquery.slotmachine.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//获取人员列表
+	            function getUserList(){
+	                var sendUrl = './get_lottery_user.txt';
+	                $.ajax({
+	    	            url: sendUrl + '?' + Date.now(),
+	    	            type: 'GET',
+	    	            dataType: 'json',
+	    	            contentType: 'application/json; charset=utf-8',
+	    	            success: function(data){
+	    	            	if(data.errCode !="400"){
+	    	            		drawNode(data.data);
+	    	            	}else{
+	    	            		alert(data.message);
+	    	            	}
+	    	            }
+	    	        })
+	            }
+	            getUserList();
+
+	            //动态绘制dom树
+	            function drawNode(data){
+	                var oneList = data.oneList , twoList = data.twoList , threeList = data.threeList , nodeList_one = [] , nodeList_two = [] , nodeList_three = [];
+	                oneList.forEach(function(node){
+	                    nodeList_one.push($("<div class='slot'>"+node+"</div>"));
+	                })
+	                twoList.forEach(function(node){
+	                    nodeList_two.push($("<div class='slot'>"+node+"</div>"));
+	                })
+	                threeList.forEach(function(node){
+	                    nodeList_three.push($("<div class='slot'>"+node+"</div>"));
+	                })
+	                $('#casino1').append(nodeList_one);
+	                $('#casino2').append(nodeList_two);
+	                $('#casino3').append(nodeList_three);
+	            }
+
+			})
+		</script>
+
+	</head>
+
+	<body>
+		<div class="header-line"></div>
+		<!-- Slot machine example -->
+		<div id="casino" style="padding-top:50px;">
+			<div class="content">
+				<h1>Use the API</h1>
+
+				<div>
+					<div id="casino1" class="slotMachine" style="margin-left: -65px;">
+						<div class="slot slot1">1</div>
+						<div class="slot slot2">2</div>
+						<div class="slot slot3">3</div>
+						<div class="slot slot4">4</div>
+						<div class="slot slot5">5</div>
+						<div class="slot slot6">6</div>
+					</div>
+
+					<div id="casino2" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+					</div>
+
+					<div id="casino3" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+					</div>
+
+					<div class="btn-group btn-group-justified btn-group-casino" role="group">
+						<div id="slotMachineButtonShuffle" type="button" class="btn btn-primary btn-lg">Shuffle!</div>
+						<div id="slotMachineButtonStop" type="button" class="btn btn-primary btn-lg">Stop!</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<script>
+			window.onload = function(){
+				var machine4 = $("#casino1").slotMachine({
+					active	: 0,
+					delay	: 500
+				});
+
+				var machine5 = $("#casino2").slotMachine({
+					active	: 1,
+					delay	: 500
+				});
+
+				machine6 = $("#casino3").slotMachine({
+					active	: 2,
+					delay	: 500
+				});
+
+				var started = 0;
+
+				$("#slotMachineButtonShuffle").click(function(){
+					started = 3;
+					machine4.shuffle();
+					machine5.shuffle();
+					machine6.shuffle();
+				});
+
+				$("#slotMachineButtonStop").click(function(){
+					switch(started){
+						case 3:
+							machine4.stop();
+							break;
+						case 2:
+							machine5.stop();
+							break;
+						case 1:
+							machine6.stop();
+							break;
+					}
+					started--;
+				});
+			}
+			$(document).ready(function(){
+
+
+			});
+		</script>
+
+
+
+	</body>
+</html>

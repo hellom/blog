@@ -1,0 +1,77 @@
+{
+  "pName" : "产品",
+  "secMenu" : [ {
+    "secMenuName" : "管理工具",
+    "secMenus" : [ {
+      "catalogName" : "网络监控 NCC",
+      "catalogCode" : "030201",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "业务监控 BCC",
+      "catalogCode" : "030202",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "操作自动化 OCC",
+      "catalogCode" : "030203",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "视频质量诊断TCC",
+      "catalogCode" : "030205",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "云虚拟化管理 VCC",
+      "catalogCode" : "030206",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "应用性能监控 APM",
+      "catalogCode" : "030207",
+      "catalogTbname" : "h_product"
+    } ]
+  }, {
+    "secMenuName" : "运维平台",
+    "secMenus" : [ {
+      "catalogName" : "配置管理库",
+      "catalogCode" : "030801",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "监控中心",
+      "catalogCode" : "030802",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "操作中心",
+      "catalogCode" : "030803",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "流程中心",
+      "catalogCode" : "030804",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "度量中心",
+      "catalogCode" : "030805",
+      "catalogTbname" : "h_product"
+    } ]
+  }, {
+    "secMenuName" : "运维门户",
+    "secMenus" : [ {
+      "catalogName" : "工作门户",
+      "catalogCode" : "030902",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "级联总览",
+      "catalogCode" : "030901",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "服务网站",
+      "catalogCode" : "030903",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "移动门户",
+      "catalogCode" : "030904",
+      "catalogTbname" : "h_product"
+    }, {
+      "catalogName" : "权限管理",
+      "catalogCode" : "030905",
+      "catalogTbname" : "h_product"
+    } ]
+  } ]
+}

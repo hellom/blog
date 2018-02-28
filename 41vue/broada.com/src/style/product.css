@@ -1,0 +1,64 @@
+.productHeader {
+  height: 1.08rem;
+  position: relative;
+  background-color: #ebebeb;
+}
+.productHeader h1 {
+  height: 1.08rem;
+  line-height: 1.08rem;
+  text-align: center;
+  margin: 0 0.4rem;
+  font-size: 0.4rem;
+  color: #4d4e4e;
+}
+.productHeader .more {
+  width: 0.33rem;
+  position: absolute;
+  top: 0.45rem;
+  right: 0.4rem;
+}
+.methodTitle {
+  color: #4d4e4e;
+  font-size: 0.34rem;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+.contentWrap {
+  margin: 0 5%;
+  font-size: 0.2rem;
+  color: #4d4e4e;
+}
+.contentWrap .xias {
+  font-size: 0.34rem;
+  color: #4d4e4e;
+  line-height: 1rem;
+}
+.contentWrap p {
+  font-size: 0.3rem;
+  color: #909090;
+  line-height: 0.5rem;
+}
+.contentWrap img {
+  width: 100%;
+}
+.contentWrap .p_title3 {
+  font-size: 0.3rem;
+  color: #4d4e4e;
+  line-height: 1rem;
+}
+.rProdWrap {
+  margin: 0 5%;
+}
+.rProdWrap .rProdTitle {
+  font-size: 0.34rem;
+  color: #4d4e4e;
+  height: 0.76rem;
+  line-height: 0.76rem;
+}
+.rProdWrap .rProd {
+  height: 0.7rem;
+  line-height: 0.7rem;
+  margin-left: 0.7rem;
+  font-size: 0.24rem;
+  color: #909090;
+}

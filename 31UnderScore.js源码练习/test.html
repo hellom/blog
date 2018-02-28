@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+    <style>
+        
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color:    red;
+}
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color:    red;
+}
+input::-moz-placeholder, textarea::-moz-placeholder { 
+    color:    red;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color:    red;
+}
+    </style>
+</head>
+<body>
+    <div class="" style="height:1200px">
+        <input type="text" placeholder='ssssss'>
+    </div>
+</body>
+<script src="./underscore-test.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var test = [1,2];
+    var demo = _.map(test,function(item,index){
+        return item*2
+    })
+
+    var o1 = {
+
+    },
+
+    o2 = {
+        b: {
+            b2: 'b2',
+            b3:{
+                d1:'d1'
+            }
+        },
+        c: 'c'
+    };
+
+    function log() {
+      console.log('hello world');
+    }
+
+    window.onscroll = _.debounce(log, 1000,true);
+    // window.onscroll = _.throttle(log, 1000, {leading: false});
+    // window.onscroll = _.throttle(log, 1000, {trailing: false});
+
+    console.log(_.escape('Curly, Larry & Moe'));
+</script>
+</html>

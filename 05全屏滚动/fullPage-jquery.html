@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fullPage-jquery</title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.mousewheel.min.js"></script>
+	<script src="js/jquery.easing.js"></script>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 100%;
+			overflow: hidden;
+			position: relative;
+			background: #ddd;
+		}
+		.box{
+			position: absolute;
+			width: 100%;
+		}
+		.box1{
+			background-color: green;
+			width: 100%;
+		}
+		.box2{
+			background-color: yellow;
+			width: 100%;
+		}
+		.box3{
+			background-color: blue;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container" id="container">
+		<div class="box" id="box">
+			<div id="box1" class="box1">box1</div>
+			<div id="box2" class="box2">box2</div>
+			<div id="box3" class="box3">box3</div>
+		</div>
+	</div>
+	<script>
+		//获取浏览器视口的高度
+		var innerHeight = $(document).height();
+		//复制首个元素和末尾元素
+		$(".box > div:last-child").clone().insertBefore(".box > div:first-child");
+		$(".box > div:nth-child(2)").clone().appendTo(".box");
+		var boxList = $(".box>div");
+		var length = boxList.length;
+		//获取元素，分别为元素设置高度
+		var container = $(".container");
+		var box = $(".box");
+		var boxHeight = innerHeight + "px";
+		var topOffset = -innerHeight + "px";
+		container.css("height",boxHeight);
+		box.css("top",topOffset);
+		box.css("height",innerHeight*length + "px");
+		boxList.each(function(index){
+			$(this).css("height",boxHeight);
+		});
+		//鼠标滚动触发box滚动
+		var index = 1;
+		$(document).mousewheel(function(event, delta, deltaX, deltaY){
+			if(delta < 0 ){
+				index == length? index = 1 : index++;
+				scrollBox(-innerHeight);
+			}else{
+				index == 1 ? index = length : index--;
+				scrollBox(innerHeight);
+			}
+		});
+		function scrollBox(offsetNum){
+			var heightOffset = parseInt(box.css("top")) + offsetNum;
+			var topHeight = (length-1) * innerHeight;
+			if (offsetNum > 0) {
+                offsetNum = '+=' + offsetNum;
+            }
+            else {
+                offsetNum = '-=' + Math.abs(offsetNum);
+            }
+			box.animate({"top":offsetNum},1000,'easeInBack',function(){
+				if(heightOffset <= -topHeight){
+					box.css("top",-innerHeight);
+				}
+				if(heightOffset > -innerHeight){
+					box.css("top",-topHeight);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

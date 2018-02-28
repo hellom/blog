@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo-2</title>
+	<style>
+		.img-1{
+			width: 456px;
+			height: 345px;
+			background: url(./1.png) center no-repeat;
+			position: relative;
+		}
+		.img-2{
+			position: absolute;
+			top:204px;
+			left:85px;
+			background: url(./2.png) center no-repeat;
+			z-index: 999;
+			width: 13px;
+			height: 19px;
+			animation: move 800ms linear infinite;
+		}
+		@keyframes move{
+			from{
+				top:204px;
+				left:85px;
+			}
+			to{
+				top:174px;
+				left:157px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="img-1">
+		<div class="img-2"></div>
+	</div>
+</body>
+</html>

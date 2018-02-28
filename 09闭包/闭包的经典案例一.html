@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Closure Example</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+
+            //闭包引用其外围包含函数的活动变量的最终值
+            function createFunctions(){
+                var result = new Array();
+                
+                for (var i=0; i < 10; i++){
+                    result[i] = function(){
+                        return i;
+                    };
+                }
+                
+                return result;
+            }
+            
+            var funcs = createFunctions();
+            
+            //every function outputs 10
+            function documentWrite(ele){
+                  for (var i=0; i < ele.length; i++){
+                    document.write(ele[i]() + "<br />");
+                }  
+            }
+
+            
+            //对闭包的改进,在闭包内部使用立即执行，通过参数值传递，参数传递是按值传递的
+            function createFunctionsOther(){
+                var result = new Array();
+
+                for (var i=0; i < 10; i++){
+                    result[i] = function(num){
+                        return function(){
+                            return num;
+                        }
+                    }(i);
+                }
+                return result;
+            }
+            //
+            documentWrite(createFunctionsOther());
+        </script>
+     
+    </body>
+</html>

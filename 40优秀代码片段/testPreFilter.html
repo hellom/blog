@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./jquery.js"></script>
+    <script src="./ajaxPreFilter.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+
+    ajaxPreFilter({
+        //hook callbacks
+        onreadystatechange: function (xhr) {
+            console.log("onreadystatechange called: %O", xhr)
+        },
+        onload: function (xhr) {
+            console.log("onload called: %O", xhr)
+        },
+        //hook function
+        open: function (arg, xhr) {
+            console.log("open called: method:%s,url:%s,async:%s", arg[0], arg[1], arg[2])
+        }
+    })
+
+    $.get().done(function (d) {
+        console.log(d.substr(0, 30) + "...")
+    })
+    
+</script>
+
+</html>

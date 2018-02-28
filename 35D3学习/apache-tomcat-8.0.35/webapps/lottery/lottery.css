@@ -1,0 +1,359 @@
+ @charset "utf-8";
+/* CSS Document */
+html { font-family:"微软雅黑","Microsoft YaHei", “Helvetica Neue”, Helvetica, STHeiTi, Arial, sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+body { font-family:"微软雅黑","Microsoft YaHei";margin: 0; padding:0;font-size:0.6rem;  color: #333;  height: 100%; -webkit-overflow-scrolling: touch;overflow-x: hidden; }
+.well {
+    background-color: rgba(245, 245, 245, 0.5);
+}
+.badge {
+    font-size: 30px;
+    background-color: rgb(0, 175, 225);
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+	color: #ccd500;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+	color: #a9b119;
+}
+.clear {
+    clear: both;
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+}
+b{
+	font-weight: 600;
+}
+
+
+/* Titulos
+-------------------------------------------------------------------------*/
+h1{
+	width: 100%;
+	font-size: 40px;
+	margin-bottom: 25px;
+}
+h2{
+	color: #000000;
+    display: table-cell;
+    float: left;
+    font-size: 45px;
+    line-height: 40px;
+    margin: 0 0 50px;
+    text-align: center;
+    width: 100%;
+    font-weight: 300;
+}
+h2 span{
+	font-weight: 400;
+}
+h3{
+	float: left;
+	width: 100%;
+	margin: 0 0 20px 0;
+	font-size:40px;
+	font-family: 'Lato', 'sans-serif';
+	font-weight: 300;
+}
+h4{
+    display: table-cell;
+    float: left;
+    font-size: 35px;
+    line-height: 31px;
+    margin: 0 0 0;
+    text-align: center;
+    width: 100%;
+    font-weight: 400;
+}
+
+p.title{
+	color: #000000;
+    display: table-cell;
+    float: left;
+    font-size: 45px;
+    line-height: 40px;
+    margin: 0 0 50px;
+    text-align: center;
+    width: 100%;
+    font-weight: 300;
+}
+
+.grey {	color:#444;}
+
+.header-line {
+    width: 100%;
+    position: absolute;
+    height: 10px;
+    background-color: #A48E4E;
+    top: 0px;
+}
+
+/*
+ * Header
+ */
+header {
+    margin-top: 10px;
+	background-color: #DCD293;
+    border-bottom: 10px solid #66D4FF;
+    border-top: 20px dotted #A48E4E;
+    padding: 25px;
+}
+
+header p {
+	color:#333;
+    font-size: 25px;
+    text-align: center;
+}
+
+header a {
+	color: #6C5726;
+    font-weight: 700;
+}
+
+/*
+ * SlotMachine
+ */
+#randomize {
+    height: 400px;
+    border-bottom: 10px solid rgb(72, 158, 48);
+    background-color: #EB6B56;
+    border-top: 20px dotted #B8312F;
+}
+
+#randomize .row > div.col-xs-4 {
+    padding-left: 35px;
+}
+
+#randomize .row > div.col-xs-4 > div {
+    padding-top: 40px;
+    padding-left: 40px;
+    width: 175px;
+    height: 175px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.randomizeMachine {
+    width: 100px;
+    height: 100px;
+}
+
+.btn-group-randomize {
+    margin: 0 auto;
+    margin-top: 30px;
+    width: auto;
+}
+
+.btn-group-randomize div {
+    width: auto !important;
+}
+
+
+.btn-group-watch {
+    margin-top: 120px;
+}
+
+.btn-group-watch .btn {
+    border: none;
+    background-color: rgb(72, 158, 48);
+}
+.btn-group-watch .btn:hover, .btn-group-watch .btn:focus {
+    background-color: rgb(72, 158, 48);
+}
+
+
+.btn-group-triky {
+    margin-top: 60px;
+}
+
+/*
+ * Casino
+ */
+#casino {
+    border-top: 20px dotted rgb(180, 75, 119);
+    border-bottom: 10px solid #A48E4E;
+    background-color: rgb(240, 150, 150);
+}
+
+#casino h1 {
+    margin: 0px;
+}
+
+#casino .content:nth-child(1) {
+    text-align: center;
+    background: url('./img/machine.png') no-repeat 50% 80px;
+    height: 580px;
+}
+
+#casino .content > div {
+    clear:both;
+    padding-top: 185px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.machineContainer{
+	background-color: #000;
+	padding: 5px 1px 5px 1px;
+	overflow: hidden;
+	height: 135px;
+}
+
+.slotMachine{
+	width: 32.333333%;
+	border: 5px solid #000;
+	height: 100px;
+	padding: 0px;
+	overflow: hidden;
+	display: inline-block;
+	text-align: center;
+	background-color: #ffffff;
+}
+
+.btn-group-casino {
+    margin-top: 150px;
+    margin-left: -32px;
+}
+
+.btn-group-casino .btn {
+    border: none;
+    background-color: rgb(209, 79, 119);
+}
+.btn-group-casino .btn:hover, .btn-group-casino .btn:focus {
+    background-color: rgb(180, 75, 119);
+}
+
+/*
+ * Footer
+ */
+footer{
+	width:100%;
+	background-color: #6C5726;
+	border-top: 20px dotted #A48E4E;
+    height: 180px;
+    padding-top: 40px;
+    text-align: center;
+    color: #DCD293;
+}
+
+#textMachine {
+	width:520px;
+	height: 67px;
+	overflow: hidden;
+	display: inline-block;
+	text-align: left;
+}
+
+.machineResult{
+	color:#fff;
+	text-align:center;
+	font-weight: 900;
+}
+.noBorder{
+	border:none !important;
+	background: transparent !important;
+}
+.slotMachine .slot{
+	height:100px;
+	background-position-x: 55%;
+    font-size: 40px;
+    line-height: 100px;
+	background-repeat: no-repeat;
+}
+.btn-group-lg>.btn, .btn-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn-group-justified>.btn, .btn-group-justified>.btn-group {
+    display: table-cell;
+    float: none;
+    width: 1%;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding: 10px 16px;
+}
+.btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle){
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-group-justified {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+}
+.slot_start{
+    background: url(./img/slot4.png) center no-repeat;
+    width: 100px;
+    height: 100px;
+}
+
+.wrap{
+    position: relative;
+}
+.scroll{
+    -webkit-animation: scroll 15s infinite linear;
+            animation: scroll 15s infinite linear;
+}
+@-webkit-keyframes scroll
+{
+	from {top:0px;}
+	to {top:-7900px;}
+}
+@keyframes scroll
+{
+	from {top:0px;}
+	to {top:-7900px;}
+}
+.scroll_slow{
+    -webkit-animation: scroll_slow 2s;
+            animation: scroll_slow 2s;
+    -webkit-animation-fill-mode:forwards;
+            animation-fill-mode:forwards;
+}
+@keyframes scroll_slow
+{
+	from {top:0px;}
+	to {top:-400px;}
+}

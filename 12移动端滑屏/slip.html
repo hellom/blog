@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>控制父容器方法</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<style>
+		*{margin: 0;padding: 0}
+		.swipe-wrap{width: 100%;height: 100%;overflow: hidden;position: relative;}
+		.swipe{width: 100%;position: absolute;}
+		.swipe-box{width: 100%;overflow: hidden;}
+		.swipe1{background-color: orange;}
+		.swipe2{background-color: blue;}
+		.swipe3{background-color: red;}
+		.swipe4{background-color: green;}
+	</style>
+</head>
+<body>
+	<div class="swipe-wrap" id="slip">
+		<div class="swipe">
+			<div class="swipe-box swipe1">第1屏</div>
+			<div class="swipe-box swipe2">第2屏</div>
+			<div class="swipe-box swipe3">第3屏</div>
+			<div class="swipe-box swipe4">第4屏</div>
+		</div>
+	</div>
+	<script>
+	var windowHeight = window.document.documentElement.clientHeight;
+	var slipWrap = document.getElementById('slip');
+	var slips = document.getElementsByClassName('swipe-box');
+	for(var i=0 ;i<slips.length;i++){
+		slips[i].style.height = windowHeight + "px";
+	}
+	slipWrap.style.height = windowHeight + "px";
+	</script>
+</body>
+</html>
