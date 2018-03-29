@@ -1,829 +1,867 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        html,body{
+        html,
+        body {
             width: 100%;
-            height:100%;
+            height: 100%;
             margin: 0px;
-            padding:0px;
+            padding: 0px;
         }
+
         /*----------------------布局css start-----------------*/
+
         #test_div {
             width: 300px;
             height: 99.5%;
-            border:solid #323232 1px;
+            border: solid #323232 1px;
             float: left;
         }
-        #my_div{
+
+        #my_div {
             height: 99.5%;
-            border:solid #323232 1px;
-            float: left;
-            width: calc(100% - 300px - 15px);
+            border: solid #323232 1px;
+            width: 100%;
             margin-right: 5px;
             overflow: hidden;
         }
-        #scroll{
+
+        #scroll {
             width: 100%;
             height: 99.5%;
         }
-        #left_div{
+
+        #left_div {
             float: left;
             width: 300px;
             height: 100%;
             background-color: #fff;
             border: solid #323232 1px;
-            text-align:center;
+            text-align: center;
         }
-        #right_div{
-            margin-left: 300px;
-            margin-right: 1px;
+
+        #right_div {
+            overflow: hidden;
             height: 100%;
-            background-color: #ffffff;
             border: solid #323232 1px;
-            /*滚动条*/
-            overflow: auto;
         }
-        #rightMenuDiv{
-            position:absolute;
+
+        #rightMenuDiv {
+            position: absolute;
             background-color: #FFFFFF;
             width: 260px;
             height: 300px;
-            border:solid #323232 1px;
-            box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+            border: solid #323232 1px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
         }
+
         /*---------------------- end -----------------*/
+
         /*---------------------- 左侧选择列表 start-----------------*/
-        .dragUI{
+
+        .dragUI {
             width: 150px;
             height: 100px;
             /*background-color: #323232;*/
-            margin:10px auto;
+            margin: 10px auto;
         }
-        .img{
-            margin:0px auto;
+
+        .img {
+            margin: 0px auto;
         }
+
         /*---------------------- end -----------------*/
+
         /*----------------------右键菜单相关 start-----------------*/
-        #rightMenuDiv{
-            position:absolute;
+
+        #rightMenuDiv {
+            position: absolute;
             float: left;
             background-color: #FFFFFF;
             width: 220px;
             height: 260px;
-            border:solid #323232 1px;
-            box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+            border: solid #323232 1px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
         }
-        .text{
+
+        .text {
             width: 100%;
             pointer-events: none;
             margin-left: 40px;
-            text-align:center;
+            text-align: center;
             line-height: 30px;
         }
-        .itemMenuDiv{
+
+        .itemMenuDiv {
             height: 30px;
             /*background-color: yellow;*/
-            border-bottom:1px solid #000;
+            border-bottom: 1px solid #000;
             /*border-left:1px solid #000;*/
             /*border-right:1px solid #000;*/
             pointer-events: all;
         }
 
-        .iconUI{
-
-        }
+        .iconUI {}
 
         .rightMenuHidden {
             display: none;
         }
+
         .tmpLineHidden {
             display: none;
         }
+
         /*---------------------- end -----------------*/
     </style>
 </head>
+
 <body>
 
-<div id="test_div">
-
-</div>
-<div id="my_div">
-    <div id="scroll">
-        <!-- 右键菜单 -->
-        <div id="rightMenuDiv" class="rightMenuHidden">
-            <div id="rightMenu" style="margin-top: 5px;">
-                <div class="itemMenuDiv">
-                    <text class="text" value="xx">第一个选项</text>
-                </div>
-                <div class="itemMenuDiv">
-                    <text class="text" value="yy">第二个选项</text>
+    <div id="my_div">
+        <div id="scroll">
+            <!-- 右键菜单 -->
+            <div id="rightMenuDiv" class="rightMenuHidden">
+                <div id="rightMenu" style="margin-top: 5px;">
+                    <div class="itemMenuDiv">
+                        <text class="text" value="xx">第一个选项</text>
+                    </div>
+                    <div class="itemMenuDiv">
+                        <text class="text" value="yy">第二个选项</text>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- 左侧列表 -->
-        <div id="left_div">
-        </div>
-        <!-- 右侧绘制区 -->
-        <div id="right_div">
-        </div>
+            <!-- 左侧列表 -->
+            <div id="left_div">
+            </div>
+            <!-- 右侧绘制区 -->
+            <div id="right_div">
+            </div>
 
+        </div>
     </div>
-</div>
 
-<script src="js/d3v3.js"></script>
-<script>
-    /*------------------------------------------------------------- 变量 start------------------------------------------------------------------*/
-    var ICON_WIDTH = 50;
-    var ICON_HEIGHT = 50;
-    // 右键类型
-    var RTGHT_ITEM_CONNECT = 100; // 连线
-    var RTGHT_ITEM_UNCONNECT = 101; // 取消连线
-    var RTGHT_ITEM_SAVE = 102; // 保存
-    var RTGHT_ITEM_DELETE_NODE = 200; // 删除节点
-    var RTGHT_ITEM_DELETE_NODE_LINES = 201; // 删除节点所有线
-    var RTGHT_ITEM_DELETE_LINE = 300; // 删除线
-    var CONNECT = "连线";
-    var UNCONNECT = "取消连线";
-    var SAVE = "保存";
-    var DELETE_NODE = "删除节点";
-    var DELETE_NODE_LINES = "删除节点所有线";
-    var DELETE_LINE = "删除线";
-    // 是否是连线状态
-    var isDrawLine = false;
-    // 是否显示右键菜单
-    var couldShowRightMenu = false;
-    // 集合
-    var iconMaps = d3.map();
-    var lineArray = [];
-    // 选中的icon
-    var selectUI = null;
-    var selectLine = null;
-    var superLine = null;
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
-    /*------------------------------------------------------------- 数据源 start------------------------------------------------------------------*/
-    var leftData = [
-        {"name":"a.png","url":"img/a.png","type":"rect","id":"1"}
-        ,{"name":"b.png","url":"img/b.png","type":"rect","id":"2"}
-        ,{"name":"c.png","url":"img/c.png","type":"rect","id":"3"}
-        ,{"name":"d.png","url":"img/d.png","type":"rect","id":"4"}];
-    var leftDiv = d3.select("body #left_div")
-        .on("mousedown", function () {
-            couldShowRightMenu = false;
-        })
-        .selectAll("xxx")
-        .data(leftData)
-        .enter()
-        .append("div")
-        .attr("class","dragUI")
-        .style("width","100%")
-        .style("margin-top","20px")
-        .style("margin-bottom","20px")
-        .style("background-color", "#fff");
-    var leftDiv_img = leftDiv
-        .append("img")
-        .attr("class","img")
-        .attr("draggable",true)
-        .attr("src", function (d) {
-            return d.url;
-        })
-        .on("dragstart", function (d) {
-            d3.event.dataTransfer.setData('type', d.type);
-            d3.event.dataTransfer.setData('name', d.name);
-            d3.event.dataTransfer.setData('id', d.id);
-        });
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+    <script src="js/d3v3.js"></script>
+    <script>
+        /*------------------------------------------------------------- 变量 start------------------------------------------------------------------*/
+        var ICON_WIDTH = 50;
+        var ICON_HEIGHT = 50;
+        // 右键类型
+        var RTGHT_ITEM_CONNECT = 100; // 连线
+        var RTGHT_ITEM_UNCONNECT = 101; // 取消连线
+        var RTGHT_ITEM_SAVE = 102; // 保存
+        var RTGHT_ITEM_DELETE_NODE = 200; // 删除节点
+        var RTGHT_ITEM_DELETE_NODE_LINES = 201; // 删除节点所有线
+        var RTGHT_ITEM_DELETE_LINE = 300; // 删除线
+        var CONNECT = "连线";
+        var UNCONNECT = "取消连线";
+        var SAVE = "保存";
+        var DELETE_NODE = "删除节点";
+        var DELETE_NODE_LINES = "删除节点所有线";
+        var DELETE_LINE = "删除线";
+        // 是否是连线状态
+        var isDrawLine = false;
+        // 是否显示右键菜单
+        var couldShowRightMenu = false;
+        // 集合
+        var iconMaps = d3.map();
+        var lineArray = [];
+        // 选中的icon
+        var selectUI = null;
+        var selectLine = null;
+        var superLine = null;
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+        /*------------------------------------------------------------- 数据源 start------------------------------------------------------------------*/
+        var leftData = [
+            { "name": "a.png", "url": "img/a.png", "type": "rect", "id": "1" }
+            , { "name": "b.png", "url": "img/b.png", "type": "rect", "id": "2" }
+            , { "name": "c.png", "url": "img/c.png", "type": "rect", "id": "3" }
+            , { "name": "d.png", "url": "img/d.png", "type": "rect", "id": "4" }];
+        var leftDiv = d3.select("body #left_div")
+            .on("mousedown", function () {
+                couldShowRightMenu = false;
+            })
+            .selectAll("xxx")
+            .data(leftData)
+            .enter()
+            .append("div")
+            .attr("class", "dragUI")
+            .style("width", "100%")
+            .style("margin-top", "20px")
+            .style("margin-bottom", "20px")
+            .style("background-color", "#fff");
+        var leftDiv_img = leftDiv
+            .append("img")
+            .attr("class", "img")
+            .attr("draggable", true)
+            .attr("src", function (d) {
+                return d.url;
+            })
+            .on("dragstart", function (d) {
+                d3.event.dataTransfer.setData('type', d.type);
+                d3.event.dataTransfer.setData('name', d.name);
+                d3.event.dataTransfer.setData('id', d.id);
+            });
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
 
-    /*------------------------------------------------------------- 右键菜单 start------------------------------------------------------------------*/
-    // 右键菜单列表
-    var rightMenuItems = [];
-    /**
-     * 屏蔽右键菜单
-     *
-     */
-    document.oncontextmenu = function (event){
-        if(window.event){
-            event = window.event;
-        }try{
-            var the = event.srcElement;
-            if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")){
-                // 显示右键菜单
-                if(d3.selectAll(".itemMenuDiv")[0].length > 0 && couldShowRightMenu){
-                    showRightMenu(event);
+        /*------------------------------------------------------------- 右键菜单 start------------------------------------------------------------------*/
+        // 右键菜单列表
+        var rightMenuItems = [];
+        /**
+         * 屏蔽右键菜单
+         *
+         */
+        document.oncontextmenu = function (event) {
+            if (window.event) {
+                event = window.event;
+            } try {
+                var the = event.srcElement;
+                if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+                    // 显示右键菜单
+                    if (d3.selectAll(".itemMenuDiv")[0].length > 0 && couldShowRightMenu) {
+                        showRightMenu(event);
+                    }
+                    return false;
                 }
+                return true;
+            } catch (e) {
                 return false;
             }
-            return true;
-        }catch (e){
-            return false;
+        };
+        /**
+         * 显示右键菜单
+         *
+         */
+        function showRightMenu(event) {
+            d3.select("body").selectAll("#rightMenuDiv")
+                .classed("rightMenuHidden", false)
+                .style("left", function () {
+                    return event.clientX + 5 + "px"; // - d3.select("body #my_div").property("offsetLeft")
+                })
+                .style("top", function () {
+                    return event.clientY + 5 + "px"; // - d3.select("body #my_div").property("offsetTop")
+                });
+            // 右击菜单添加事件
+            addRightMenuEvents();
         }
-    };
-    /**
-     * 显示右键菜单
-     *
-     */
-    function showRightMenu(event){
-        d3.select("body").selectAll("#rightMenuDiv")
-            .classed("rightMenuHidden",false)
-            .style("left", function () {
-                return event.clientX + 5 + "px"; // - d3.select("body #my_div").property("offsetLeft")
-            })
-            .style("top", function () {
-                return event.clientY + 5 + "px"; // - d3.select("body #my_div").property("offsetTop")
+        /**
+         * 右键移入移出效果
+         *
+         */
+        function addRightMenuEvents() {
+            var rightMenuDiv = d3.select("body").selectAll(".itemMenuDiv")
+                .on("mouseover", function () {
+                    d3.select(this)
+                        .style("background-color", "blue");
+                    d3.select(this).selectAll(".text")
+                        .style("color", "#FFF")
+                })
+                .on("mouseout", function () {
+                    d3.select(this)
+                        .style("background-color", "#FFF");
+                    d3.select(this).selectAll(".text")
+                        .style("color", "#000")
+                })
+                .on("mousedown", function () {
+                    var _itemIndex = parseInt(d3.select(this).selectAll(".text")
+                        .attr("value"));
+                    console.log("右键选项：" + _itemIndex);
+                    // 隐藏右键菜单
+                    d3.select("body").selectAll("#rightMenuDiv").classed("rightMenuHidden", true);
+                    rightMenuItemClick(_itemIndex);
+                });
+        }
+        /**
+         * 按下右键对应对的处理方式
+         */
+        function rightMenuItemClick(itemIndex) {
+            switch (itemIndex) {
+                // 连线
+                case RTGHT_ITEM_CONNECT: {
+                    isDrawLine = !isDrawLine;
+                    // 还原缩放
+                    //                view.transition()
+                    //                    .duration(500)
+                    //                    .attr("transform","translate(0,0)scale(1)");
+                    // 恢复鼠标手势
+                    d3.selectAll(".iconUI")
+                        .style("cursor", "crosshair");
+                    break;
+                }
+                // 取消连线
+                case RTGHT_ITEM_UNCONNECT: {
+                    isDrawLine = !isDrawLine;
+
+                    // 恢复鼠标手势
+                    d3.selectAll(".iconUI")
+                        .style("cursor", "default");
+                    break;
+                }
+                // 删除节点
+                case RTGHT_ITEM_DELETE_NODE: {
+                    if (selectUI) {
+                        /* ----------------界面删除---------------- */
+                        // 当前节点
+                        selectUI.ui.remove();
+                        // 相关线
+                        var _lines = getLines(selectUI.id);
+                        for (var i = 0; i < _lines.length; i++) {
+                            _lines[i].line.remove();
+                        }
+                        /* ----------------集合删除---------------- */
+                        // 删除相关线
+                        delLines(selectUI.id);
+                        iconMaps.remove(selectUI.id)
+                    }
+                    break;
+                }
+                // 删除连线
+                case RTGHT_ITEM_DELETE_LINE: {
+                    if (selectLine) {
+                        /* ----------------界面删除---------------- */
+                        selectLine.remove();
+                        /* ----------------集合删除---------------- */
+                        delLine(selectLine);
+                    }
+                }
+            }
+        }
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+
+        /*------------------------------------------------------------- 缩放/拖拽行为 start------------------------------------------------------------------*/
+        // 缩放行为
+        var zoom = d3.behavior.zoom()
+            .scaleExtent([0.1, 5])
+            .on("zoom", function () {
+                console.log(d3.event);
+                // 缩放
+                view.attr("transform", function () { return "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")" })
+                // 缩放
+                lines.attr("transform", function () { return "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")" })
             });
-        // 右击菜单添加事件
-        addRightMenuEvents();
-    }
-    /**
-     * 右键移入移出效果
-     *
-     */
-    function addRightMenuEvents() {
-        var rightMenuDiv = d3.select("body").selectAll(".itemMenuDiv")
-            .on("mouseover", function () {
-                d3.select(this)
-                    .style("background-color", "blue");
-                d3.select(this).selectAll(".text")
-                    .style("color", "#FFF")
+
+        // 拖拽行为
+        var drag = d3.behavior.drag()
+            .origin(function (d, i) {
+                // 定位原点
+                return { x: d3.select(this).attr("x"), y: d3.select(this).attr("y") };
             })
-            .on("mouseout", function () {
-                d3.select(this)
-                    .style("background-color", "#FFF");
-                d3.select(this).selectAll(".text")
-                    .style("color", "#000")
+            // 禁止冒泡
+            .on("dragstart", function () {
+                d3.event.sourceEvent.stopPropagation();
             })
+            .on("drag", function () {
+                // 拖拽
+                if (!isDrawLine) {
+                    console.log(333);
+
+                    d3.select(this)
+                        .attr("x", function () {
+                            return d3.event.x
+                        })
+                        .attr("y", function () {
+                            return d3.event.y
+                        });
+                    // 重新绘制相关线
+                    redrawLines(selectUI.id);
+                } else {
+                    // 画线
+                    if (selectUI) {
+                        // 还原缩放
+                        //                    view.transition()
+                        //                        .duration(500)
+                        //                        .attr("transform","translate(0,0)scale(1)");
+                        d3.event.scale = 0;
+                        // 调用css 显示线
+                        d3.selectAll("#tmpLine").classed("tmpLineHidden", false);
+                        var data = [];
+                        // 获取偏移量
+
+                        var _tmpTransform = getTranslate(view.attr("transform"));
+                        // 直线
+                        if (_tmpTransform) {
+                            data[0] = {
+                                "x": parseFloat(selectUI.ui.attr("x")) + parseFloat(_tmpTransform.translate[0]) + ICON_WIDTH / 2
+                                , "y": parseFloat(selectUI.ui.attr("y")) + parseFloat(_tmpTransform.translate[1]) + ICON_HEIGHT / 2
+                            };
+                            data[1] = { "x": d3.event.sourceEvent.layerX, "y": d3.event.sourceEvent.layerY };
+                        } else {
+                            data[0] = {
+                                "x": parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2
+                                , "y": parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT / 2
+                            };
+                            data[1] = { "x": d3.event.sourceEvent.layerX, "y": d3.event.sourceEvent.layerY };
+                        }
+                        // 曲线(如果使用直线需要注释)
+                        var data;
+                        if (_tmpTransform) {
+                            data = {
+                                source: {
+                                    x: parseFloat(selectUI.ui.attr("x")) + parseFloat(_tmpTransform.translate[0]) + ICON_WIDTH / 2
+                                    , y: parseFloat(selectUI.ui.attr("y")) + parseFloat(_tmpTransform.translate[1]) + ICON_HEIGHT / 2
+                                }
+                                , target: { x: d3.event.sourceEvent.layerX, y: d3.event.sourceEvent.layerY }
+                            }
+                        } else {
+                            data = {
+                                source: {
+                                    x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2
+                                    , y: parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT / 2
+                                }
+                                , target: { x: d3.event.sourceEvent.layerX, y: d3.event.sourceEvent.layerY }
+                            }
+                        }
+                        // 连线
+                        tmpLine
+                            .attr("d", lineBuilder(data))
+                    }
+                }
+            })
+            .on("dragend", function () {
+                // 调用css 隐藏线
+                d3.selectAll("#tmpLine").classed("tmpLineHidden", true);
+            });
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+
+        /*------------------------------------------------------------- 线生成器 start------------------------------------------------------------------*/
+        /**
+         * 直线
+         */
+        //    var lineBuilder = d3.svg.line()
+        //        .x(function (d) {
+        //            return d.x;
+        //        })
+        //        .y(function (d) {
+        //            return d.y
+        //        });
+        /**
+         * 曲线
+         */
+        var lineBuilder = d3.svg.diagonal()
+            .projection(function (d) { return [d.x, d.y] })
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+
+        /*------------------------------------------------------------- 布局 start------------------------------------------------------------------*/
+        var rightDiv = d3.select("body")
             .on("mousedown", function () {
-                var _itemIndex = parseInt(d3.select(this).selectAll(".text")
-                    .attr("value"));
-                console.log("右键选项："+_itemIndex);
                 // 隐藏右键菜单
                 d3.select("body").selectAll("#rightMenuDiv").classed("rightMenuHidden", true);
-                rightMenuItemClick(_itemIndex);
+            })
+            /**
+             * right_div工作区右键
+             */
+            .selectAll("#right_div")
+            .on("mousedown", function () {
+                couldShowRightMenu = true;
+                // 隐藏右键菜单
+                d3.select("body").selectAll("#rightMenuDiv").classed("rightMenuHidden", true);
+                // 连线
+                var obj = {};
+                if (!isDrawLine) { // 连线
+                    obj.value = RTGHT_ITEM_CONNECT;
+                    obj.name = CONNECT;
+                } else {
+                    // 取消连线
+                    obj.value = RTGHT_ITEM_UNCONNECT;
+                    obj.name = UNCONNECT;
+                }
+                rightMenuItems = [obj];
+                // 设置右键菜单
+                setRightMenu();
             });
-    }
-    /**
-     * 按下右键对应对的处理方式
-     */
-    function rightMenuItemClick(itemIndex){
-        switch(itemIndex){
-            // 连线
-            case RTGHT_ITEM_CONNECT:{
-                isDrawLine = !isDrawLine;
-                // 还原缩放
-//                view.transition()
-//                    .duration(500)
-//                    .attr("transform","translate(0,0)scale(1)");
-                // 恢复鼠标手势
-                d3.selectAll(".iconUI")
-                    .style("cursor","crosshair");
-                break;
-            }
-            // 取消连线
-            case RTGHT_ITEM_UNCONNECT:{
-                isDrawLine = !isDrawLine;
+        // 获取尺寸
+        var width = rightDiv.property("clientWidth");
+        var height = rightDiv.property("clientHeight");
+        // div的偏移量
+        var rightDiv_left = rightDiv.property("offsetLeft");
+        var rightDiv_top = rightDiv.property("offsetTop");
 
-                // 恢复鼠标手势
-                d3.selectAll(".iconUI")
-                    .style("cursor","default");
-                break;
-            }
-            // 删除节点
-            case RTGHT_ITEM_DELETE_NODE:{
-                if(selectUI){
-                    /* ----------------界面删除---------------- */
-                    // 当前节点
-                    selectUI.ui.remove();
-                    // 相关线
-                    var _lines = getLines(selectUI.id);
-                    for(var i=0;i<_lines.length;i++){
-                        _lines[i].line.remove();
-                    }
-                    /* ----------------集合删除---------------- */
-                    // 删除相关线
-                    delLines(selectUI.id);
-                    iconMaps.remove(selectUI.id)
-                }
-                break;
-            }
-            // 删除连线
-            case RTGHT_ITEM_DELETE_LINE:{
-                if(selectLine){
-                    /* ----------------界面删除---------------- */
-                    selectLine.remove();
-                    /* ----------------集合删除---------------- */
-                    delLine(selectLine);
-                }
-            }
-        }
-    }
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+        var svg = rightDiv.append("svg")
+            .attr("width", width - 5)
+            .attr("height", height - 5)
+            // 鼠标拖动移入时
+            .on("dragover", function () {
+                console.log(d3.event);
 
-    /*------------------------------------------------------------- 缩放/拖拽行为 start------------------------------------------------------------------*/
-    // 缩放行为
-    var zoom = d3.behavior.zoom()
-        .scaleExtent([0.1,5])
-        .on("zoom", function () {
-            // 缩放
-            view.attr("transform",function(){return "translate("+ d3.event.translate +")scale("+ d3.event.scale +")"})
-            // 缩放
-            lines.attr("transform",function(){return "translate("+ d3.event.translate +")scale("+ d3.event.scale +")"})
-        });
+                d3.event.preventDefault();
+                d3.event.dataTransfer.dropEffect = "copy";
+                return false;
+            })
+            // 鼠标拖动弹起后
+            .on("drop", dropHandler)
+            .append("g")
+            .call(zoom);
 
-    // 拖拽行为
-    var drag = d3.behavior.drag()
-        .origin(function(){
-            // 定位原点
-            return {x: d3.select(this).attr("x"),y: d3.select(this).attr("y")};
-        })
-        // 禁止冒泡
-        .on("dragstart", function () {
-            d3.event.sourceEvent.stopPropagation();
-        })
-        .on("drag", function () {
-            // 拖拽
-            if(! isDrawLine){
-                d3.select(this)
-                    .attr("x",function(){
-                        return  d3.event.x
-                    })
-                    .attr("y",function(){
-                        return  d3.event.y
-                    });
-                // 重新绘制相关线
-                redrawLines(selectUI.id);
-            }else {
-                // 画线
-                if(selectUI){
-                    // 还原缩放
-//                    view.transition()
-//                        .duration(500)
-//                        .attr("transform","translate(0,0)scale(1)");
-                    d3.event.scale = 0;
-                    // 调用css 显示线
-                    d3.selectAll("#tmpLine").classed("tmpLineHidden",false);
-                    var data = [];
-                    // 获取偏移量
-                    var _tmpTransform = getTranslate(view.attr("transform"));
-                    // 直线
-                    if(_tmpTransform){
-                        data[0] = {"x":parseFloat(selectUI.ui.attr("x")) + parseFloat(_tmpTransform.translate[0]) + ICON_WIDTH/2
-                            , "y":parseFloat(selectUI.ui.attr("y")) + parseFloat(_tmpTransform.translate[1]) + ICON_HEIGHT/2};
-                        data[1] = {"x":d3.event.sourceEvent.layerX, "y":d3.event.sourceEvent.layerY};
-                    }else{
-                        data[0] = {"x":parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH/2
-                            , "y":parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT/2};
-                        data[1] = {"x":d3.event.sourceEvent.layerX, "y":d3.event.sourceEvent.layerY};
-                    }
-                    // 曲线(如果使用直线需要注释)
-                    var data;
-                    if(_tmpTransform){
-                        data = {source:{x:parseFloat(selectUI.ui.attr("x")) + parseFloat(_tmpTransform.translate[0]) + ICON_WIDTH/2
-                            , y:parseFloat(selectUI.ui.attr("y")) + parseFloat(_tmpTransform.translate[1]) + ICON_HEIGHT/2}
-                            ,target:{x:d3.event.sourceEvent.layerX, y:d3.event.sourceEvent.layerY}}
-                    }else{
-                        data = {source: {x:parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH/2
-                            , y:parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT/2}
-                            ,target:{x:d3.event.sourceEvent.layerX, y:d3.event.sourceEvent.layerY}}
-                    }
-                    // 连线
-                    tmpLine
-                        .attr("d",lineBuilder(data))
-                }
-            }
-        })
-        .on("dragend", function(){
-            // 调用css 隐藏线
-            d3.selectAll("#tmpLine").classed("tmpLineHidden",true);
-        });
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+        svg.append("rect")
+            .attr("fill", "none")
+            .attr("width", width - 5)
+            .attr("height", height - 5)
+            /* 一定要把pointer-events 样式设置成all，才能执行空白区域缩放及拖拽 */
+            .style("pointer-events", "all");
 
-    /*------------------------------------------------------------- 线生成器 start------------------------------------------------------------------*/
-    /**
-     * 直线
-     */
-//    var lineBuilder = d3.svg.line()
-//        .x(function (d) {
-//            return d.x;
-//        })
-//        .y(function (d) {
-//            return d.y
-//        });
-    /**
-     * 曲线
-     */
-    var lineBuilder = d3.svg.diagonal()
-        .projection(function(d){return [d.x, d.y]})
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+        // svg箭头 start-----------
+        var defs = svg.append("defs");
+        var arrowMarker = defs.append("marker")
+            .attr("id", "arrow")
+            .attr("markerUnits", "strokeWidth")
+            .attr("markerWidth", "12")
+            .attr("markerHeight", "12")
+            .attr("viewBox", "0 0 12 12")
+            .attr("refX", "6")
+            .attr("refY", "6")
+            .attr("orient", "auto");
+        var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
+        arrowMarker.append("path")
+            .attr("d", arrow_path)
+            .attr("fill", "#0000ff");
+        // end ---------------------
 
-    /*------------------------------------------------------------- 布局 start------------------------------------------------------------------*/
-    var rightDiv = d3.select("body")
-        .on("mousedown", function () {
-            // 隐藏右键菜单
-            d3.select("body").selectAll("#rightMenuDiv").classed("rightMenuHidden",true);
-        })
+        // 所有line 加入到lines
+        var lines = svg.append("g")
+            .attr("id", "lines")
+            .attr("stroke-width", "2px")
+            .attr("marker-end", "url(#arrow)");
+        // 所有iconui 加入到view
+        var view = svg.append("g")
+            .attr("id", "uis");
+        // 临时线
+        var tmpLine = svg.append("g")
+            .attr("id", "tmpLine")
+            .attr("class", "tmpLineHidden")
+            .append("path")
+            .attr("stroke", "#f00")
+            .attr("marker-end", "url(#arrow)")
+            .attr("stroke-width", "3px")
+            .attr("stroke-dasharray", "10 7")
+            .attr("fill", "none")
+            .attr("pointer-events", "none");
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+
+        /*------------------------------------------------------------- 拖放后生成显示对象 strart------------------------------------------------------------------*/
         /**
-         * right_div工作区右键
+         *  拖放后执行方法
+         *
          */
-        .selectAll("#right_div")
-        .on("mousedown", function () {
-            couldShowRightMenu = true;
-            // 隐藏右键菜单
-            d3.select("body").selectAll("#rightMenuDiv").classed("rightMenuHidden",true);
-            // 连线
-            var obj = {};
-            if(! isDrawLine){ // 连线
-                obj.value = RTGHT_ITEM_CONNECT;
-                obj.name = CONNECT;
-            }else{
-                // 取消连线
-                obj.value = RTGHT_ITEM_UNCONNECT;
-                obj.name = UNCONNECT;
-            }
-            rightMenuItems = [obj];
-            // 设置右键菜单
-            setRightMenu();
-        });
-    // 获取尺寸
-    var width = rightDiv.property("clientWidth");
-    var height = rightDiv.property("clientHeight");
-    // div的偏移量
-    var rightDiv_left = rightDiv.property("offsetLeft");
-    var rightDiv_top = rightDiv.property("offsetTop");
-
-    var svg = rightDiv.append("svg")
-        .attr("width",width-5)
-        .attr("height",height-5)
-        // 鼠标拖动移入时
-        .on("dragover",function(){
+        function dropHandler() {
+            // 取消默认行为
             d3.event.preventDefault();
-            d3.event.dataTransfer.dropEffect = "copy";
-            return false;
-        })
-        // 鼠标拖动弹起后
-        .on("drop",dropHandler)
-        .append("g")
-        .call(zoom);
-
-    svg.append("rect")
-        .attr("fill","none")
-        .attr("width",width-5)
-        .attr("height",height-5)
-        /* 一定要把pointer-events 样式设置成all，才能执行空白区域缩放及拖拽 */
-        .style("pointer-events","all");
-
-    // svg箭头 start-----------
-    var defs = svg.append("defs");
-    var arrowMarker = defs.append("marker")
-        .attr("id","arrow")
-        .attr("markerUnits","strokeWidth")
-        .attr("markerWidth","12")
-        .attr("markerHeight","12")
-        .attr("viewBox","0 0 12 12")
-        .attr("refX","6")
-        .attr("refY","6")
-        .attr("orient","auto");
-    var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";
-    arrowMarker.append("path")
-        .attr("d",arrow_path)
-        .attr("fill","#0000ff");
-    // end ---------------------
-
-    // 所有line 加入到lines
-    var lines = svg.append("g")
-        .attr("id","lines")
-        .attr("stroke-width","2px")
-        .attr("marker-end","url(#arrow)");
-    // 所有iconui 加入到view
-    var view = svg.append("g")
-        .attr("id","uis");
-    // 临时线
-    var tmpLine = svg.append("g")
-        .attr("id","tmpLine")
-        .attr("class","tmpLineHidden")
-        .append("path")
-        .attr("stroke","#f00")
-        .attr("marker-end","url(#arrow)")
-        .attr("stroke-width","3px")
-        .attr("stroke-dasharray","10 7")
-        .attr("fill","none")
-        .attr("pointer-events","none");
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
-
-    /*------------------------------------------------------------- 拖放后生成显示对象 strart------------------------------------------------------------------*/
-    /**
-     *  拖放后执行方法
-     *
-     */
-    function dropHandler(){
-        // 取消默认行为
-        d3.event.preventDefault();
-        couldShowRightMenu = true;
-        var _tmpTransform = getTranslate(view.attr("transform"));
-        var type = d3.event.dataTransfer.getData("type");
-        var name = d3.event.dataTransfer.getData("name");
-        var id = d3.event.dataTransfer.getData("id");
-        // 判断是否已经添加
-        if(iconMaps.has(id)){
-            alert("已经存在！");
-            return;
-        }
-        var ui = view
-            // 图标
-            .append("image")
-//            .append("rect")
-            .attr("fill","#0000ff")
-            .attr("class","iconUI")
-            .attr("_id",id)
-            .attr("width",ICON_WIDTH)
-            .attr("height",ICON_HEIGHT)
-            .attr("rx",12)
-            .attr("x", function () {
-               if(_tmpTransform){
-                   return (d3.event.x - rightDiv_left- _tmpTransform.translate[0])/_tmpTransform.scale  - ICON_WIDTH/2
-               }else{
-                   return d3.event.x - rightDiv_left - ICON_WIDTH/2
-               }
-            })
-            .attr("y", function () {
-               if(_tmpTransform){
-                   return (d3.event.y - rightDiv_top - _tmpTransform.translate[1])/_tmpTransform.scale - ICON_HEIGHT/2
-               }else{
-                   return d3.event.y - rightDiv_top - ICON_HEIGHT/2
-               }
-            })
-            .on("mousedown",uiMouseDownHandler)
-            .on("mouseup",uiMouseUpHandler)
-             // 执行拖拽行为
-            .call(drag);
-
-        // 图片类型
-        if(id == "1"){
-            ui.attr("xlink:href","img/a.png");
-        }else if(id == "2"){
-            ui.attr("xlink:href","img/b.png");
-        }else if(id == "3"){
-            ui.attr("xlink:href","img/c.png");
-        }else if(id == "4"){
-            ui.attr("xlink:href","img/d.png");
-        }else{
-            ui.attr("xlink:href","img/a.png");
-        }
-        selectUI = new IconUI();
-        selectUI.type = type;
-        selectUI.name = name;
-        selectUI.id = id;
-        selectUI.ui = ui;
-        // 放入集合，后续点击选中等操作会使用
-        if(iconMaps.has(id) == false){
-            iconMaps.set(id,selectUI);
-        }
-    }
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
-
-    /*------------------------------------------------------------- 定义生成对象类 start------------------------------------------------------------------*/
-    /**
-     * 生成类
-     *
-     */
-    function IconUI(){
-        var type = "";
-        var name = "";
-        var id = ""; //唯一
-        var ui = null;
-    }
-    function SuperLine(){
-        var from = null;
-        var to = null;
-        var line = null;
-    }
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
-
-    /*------------------------------------------------------------- 鼠标事件（不包括右键） start------------------------------------------------------------------*/
-    /**
-     * 鼠标按下时
-     */
-    function uiMouseDownHandler(){
-        // 隐藏右键菜单
-        d3.select("body").selectAll("#rightMenuDiv").classed("rightMenuHidden",true);
-        // 未选中的取消选择框
-        d3.selectAll(".iconUI")
-            .attr("stroke","none");
-        var _id = d3.select(this)
-            .attr("stroke","#f00")
-            .attr("stroke-width","2px")
-            .attr("_id");
-        console.log("选中的组件的id--->"+_id);
-        if(iconMaps.has(_id)){
-            selectUI = iconMaps.get(_id);
-            var obj = {};
-            obj.value = RTGHT_ITEM_DELETE_NODE;
-            obj.name = DELETE_NODE;
-            rightMenuItems = [obj];
-            // 设置右键菜单
-            setRightMenu();
-        }
-    }
-    /**
-     * 鼠标按弹起
-     */
-    function uiMouseUpHandler(){
-        if(isDrawLine){
-            // 起点不是终点
-            if(selectUI && selectUI.id != d3.select(this).attr("_id")){
-                // 是否已经存在改线
-                var _hasLine = hasLine(selectUI.id,d3.select(this).attr("_id"));
-                if(! _hasLine){
-                    // 直线
-                    var data = [];
-                    data[0] = {"x":parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH/2,"y":parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT/2};
-                    data[1] = {"x":parseFloat(d3.select(this).attr("x")) + ICON_WIDTH/2,"y":parseFloat(d3.select(this).attr("y")) + ICON_HEIGHT/2};
-                    // 曲线(如果使用直线需要注释)
-                    var data;
-                    if(parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT >= parseFloat(d3.select(this).attr("y"))){
-                        data = {source:{x:parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH/2,y:parseFloat(selectUI.ui.attr("y"))}
-                            ,target:{x:parseFloat(d3.select(this).attr("x")) + ICON_WIDTH/2,y:parseFloat(d3.select(this).attr("y")) + ICON_HEIGHT+6}}
-                    }else {
-                        data = {source:{x:parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH/2,y:parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT}
-                            ,target:{x:parseFloat(d3.select(this).attr("x")) + ICON_WIDTH/2,y:parseFloat(d3.select(this).attr("y"))-8}}
+            couldShowRightMenu = true;
+            var _tmpTransform = getTranslate(view.attr("transform"));
+            var type = d3.event.dataTransfer.getData("type");
+            var name = d3.event.dataTransfer.getData("name");
+            var id = d3.event.dataTransfer.getData("id");
+            // 判断是否已经添加
+            if (iconMaps.has(id)) {
+                alert("已经存在！");
+                return;
+            }
+            var ui = view
+                // 图标
+                .append("image")
+                //            .append("rect")
+                .attr("fill", "#0000ff")
+                .attr("class", "iconUI")
+                .attr("_id", id)
+                .attr("width", ICON_WIDTH)
+                .attr("height", ICON_HEIGHT)
+                .attr("rx", 12)
+                .attr("x", function () {
+                    if (_tmpTransform) {
+                        return (d3.event.x - rightDiv_left - _tmpTransform.translate[0]) / _tmpTransform.scale - ICON_WIDTH / 2
+                    } else {
+                        return d3.event.x - rightDiv_left - ICON_WIDTH / 2
                     }
-                    var _line = lines.append("path")
-                        .attr("class","superline")
-                        .attr("d",lineBuilder(data))
-                        .attr("stroke","#0000ff")
-                        .attr("fill","none");
-                    superLine = new SuperLine();
-                    superLine.from = selectUI.ui;
-                    superLine.to = d3.select(this);
-                    superLine.line = _line;
-                    lineArray.push(superLine)
-                    _line
-                        .attr("_id",selectUI.ui.attr("_id")+"_"+d3.select(this).attr("_id")) // 添加 _id 结构是fromUIId_toUIId
-                        .on("mouseover", function () {
-                            d3.select(this)
-                                .attr("stroke-width","4px")
-                                .attr("stroke","#ff0000")
-                                .style("cursor","hand");
-                        })
-                        .on("mouseout", function () {
-                            d3.select(this)
-                                .attr("stroke-width","2px")
-                                .attr("stroke","#0000ff")
-                                .style("cursor","defult");
-                        })
-                        .on("mousedown", function () {
-                            d3.event.stopPropagation();
-                            selectLine = d3.select(this);
-                            var obj = {};
-                            obj.value = RTGHT_ITEM_DELETE_LINE;
-                            obj.name = DELETE_LINE;
-                            rightMenuItems = [obj];
-                            // 设置右键菜单
-                            setRightMenu();
-                        })
-                }else{
-                    alert("已经存在连线!!")
-                }
-            }else{
-                alert("起始点不能是终点!")
-            }
-        }
-    }
-    /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+                })
+                .attr("y", function () {
+                    if (_tmpTransform) {
+                        return (d3.event.y - rightDiv_top - _tmpTransform.translate[1]) / _tmpTransform.scale - ICON_HEIGHT / 2
+                    } else {
+                        return d3.event.y - rightDiv_top - ICON_HEIGHT / 2
+                    }
+                })
+                .on("mousedown", uiMouseDownHandler)
+                .on("mouseup", uiMouseUpHandler)
+                // 执行拖拽行为
+                .call(drag);
 
-    /*------------------------------------------------------------- 公用方法（工具） start------------------------------------------------------------------*/
-    /**
-     *  设置右键菜单
-     *
-     */
-    function setRightMenu(){
-        d3.selectAll(".itemMenuDiv")
-            .remove();
-        for(var i=0;i<rightMenuItems.length;i++){
-            var rightMenu = d3.selectAll("#rightMenu")
-                .append("div")
-                .attr("class", "itemMenuDiv")
-                .append("text")
-                .attr("class","text")
-                .text(rightMenuItems[i]["name"])
-                .attr("value",rightMenuItems[i]["value"]);
-        }
-    }
-    /**
-     * 重新绘线
-     */
-    function redrawLines(iconId){
-        var lines = getLines(iconId);
-        for(var i=0;i<lines.length;i++){
-            var _tmp = lines[i];
-            // 直线
-            var data = [];
-            data[0] = {"x":parseFloat(_tmp.from.attr("x")) + ICON_WIDTH/2,"y":parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT/2};
-            data[1] = {"x":parseFloat(_tmp.to.attr("x")) + ICON_WIDTH/2,"y":parseFloat(_tmp.to.attr("y")) + ICON_HEIGHT/2};
-            // 曲线(如果使用直线需要注释)
-            var data
-            if(parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT >= parseFloat(_tmp.to.attr("y"))){
-                data = {source: {x:parseFloat(_tmp.from.attr("x")) + ICON_WIDTH/2,y:parseFloat(_tmp.from.attr("y"))}
-                    ,target:{x:parseFloat(_tmp.to.attr("x")) + ICON_WIDTH/2,y:parseFloat(_tmp.to.attr("y")) + ICON_HEIGHT+6}};
-            }else{
-                data = {source: {x:parseFloat(_tmp.from.attr("x")) + ICON_WIDTH/2,y:parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT}
-                    ,target:{x:parseFloat(_tmp.to.attr("x")) + ICON_WIDTH/2,y:parseFloat(_tmp.to.attr("y"))-8}};
+            // 图片类型
+            if (id == "1") {
+                ui.attr("xlink:href", "img/a.png");
+            } else if (id == "2") {
+                ui.attr("xlink:href", "img/b.png");
+            } else if (id == "3") {
+                ui.attr("xlink:href", "img/c.png");
+            } else if (id == "4") {
+                ui.attr("xlink:href", "img/d.png");
+            } else {
+                ui.attr("xlink:href", "img/a.png");
             }
-            _tmp.line
-                .attr("d",lineBuilder(data));
-        }
-    }
-    /**
-    * 是否已经存在线
-    */
-    function hasLine(fromId,toId){
-        var hasIn = false;
-        for(var i=0;i<lineArray.length;i++){
-            var _tmpline = lineArray[i];
-            if(_tmpline.from.attr("_id") == fromId && _tmpline.to.attr("_id") == toId
-                || _tmpline.from.attr("_id") == toId && _tmpline.to.attr("_id") == fromId){
-                hasIn = true;
-                break;
+            selectUI = new IconUI();
+            selectUI.type = type;
+            selectUI.name = name;
+            selectUI.id = id;
+            selectUI.ui = ui;
+            // 放入集合，后续点击选中等操作会使用
+            if (iconMaps.has(id) == false) {
+                iconMaps.set(id, selectUI);
             }
         }
-        return hasIn;
-    }
-    /**
-     * 根据起点和终点找线
-     */
-    function getLineByFormAndTo(fromId,toId){
-        var superLine = null;
-        for(var i=0;i<lineArray.length;i++){
-            var _tmpline = lineArray[i];
-            if(_tmpline.from.attr("_id") == fromId && _tmpline.to.attr("_id") == toId){
-                superLine =  _tmpline;
-                break;
-            }
-        }
-        return superLine;
-    }
-    /**
-     * 根据起点找线数组
-     */
-    function getLines(id){
-        var lines = [];
-        for(var i=0;i<lineArray.length;i++){
-            var _tmpline = lineArray[i];
-            if(_tmpline.from.attr("_id") == id || _tmpline.to.attr("_id") == id){
-                lines.push(_tmpline);
-            }
-        }
-        return lines;
-    }
-    /**
-     * 删除和节点相关线
-     */
-    function delLines(iconId){
-        for(var i=lineArray.length-1;i>=0;i--){
-            var _tmpline = lineArray[i];
-            if(_tmpline.from.attr("_id") == iconId || _tmpline.to.attr("_id") == iconId){
-                lineArray.splice(i,1);
-            }
-        }
-    }
-    /**
-     * 删除线
-     */
-    function delLine(line){
-        for(var i=lineArray.length-1;i>=0;i--){
-            var _tmpline = lineArray[i];
-            if(_tmpline.line.attr("_id") == line.attr("_id")){
-                lineArray.splice(i,1);
-            }
-        }
-    }
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
 
-    /**
-     *  解析transform
-     *
-     */
-    function getTranslate(a){
-        try {
-            if(a.indexOf("translate") != -1){
-                var b = a.split("translate")[0];
-                if(b.indexOf("scale") != -1){
-                    scale = b.split("scale")[1];
-                    translate = a.split("translate")[1]
-                }else{
-                    scale = a.split("translate")[1].split("scale")[1];
-                    translate =  a.split("translate")[1].split("scale")[0]
+        /*------------------------------------------------------------- 定义生成对象类 start------------------------------------------------------------------*/
+        /**
+         * 生成类
+         *
+         */
+        function IconUI() {
+            var type = "";
+            var name = "";
+            var id = ""; //唯一
+            var ui = null;
+        }
+        function SuperLine() {
+            var from = null;
+            var to = null;
+            var line = null;
+        }
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+
+        /*------------------------------------------------------------- 鼠标事件（不包括右键） start------------------------------------------------------------------*/
+        /**
+         * 鼠标按下时
+         */
+        function uiMouseDownHandler() {
+            // 隐藏右键菜单
+            d3.select("body").selectAll("#rightMenuDiv").classed("rightMenuHidden", true);
+            // 未选中的取消选择框
+            d3.selectAll(".iconUI")
+                .attr("stroke", "none");
+            var _id = d3.select(this)
+                .attr("stroke", "#f00")
+                .attr("stroke-width", "2px")
+                .attr("_id");
+            console.log("选中的组件的id--->" + _id);
+            if (iconMaps.has(_id)) {
+                selectUI = iconMaps.get(_id);
+                var obj = {};
+                obj.value = RTGHT_ITEM_DELETE_NODE;
+                obj.name = DELETE_NODE;
+                rightMenuItems = [obj];
+                // 设置右键菜单
+                setRightMenu();
+            }
+        }
+        /**
+         * 鼠标按弹起
+         */
+        function uiMouseUpHandler() {
+            if (isDrawLine) {
+                // 起点不是终点
+                if (selectUI && selectUI.id != d3.select(this).attr("_id")) {
+                    // 是否已经存在改线
+                    var _hasLine = hasLine(selectUI.id, d3.select(this).attr("_id"));
+                    if (!_hasLine) {
+                        // 直线
+                        var data = [];
+                        data[0] = { "x": parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, "y": parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT / 2 };
+                        data[1] = { "x": parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, "y": parseFloat(d3.select(this).attr("y")) + ICON_HEIGHT / 2 };
+                        // 曲线(如果使用直线需要注释)
+                        var data;
+                        if (parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT >= parseFloat(d3.select(this).attr("y"))) {
+                            data = {
+                                source: { x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, y: parseFloat(selectUI.ui.attr("y")) }
+                                , target: { x: parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, y: parseFloat(d3.select(this).attr("y")) + ICON_HEIGHT + 6 }
+                            }
+                        } else {
+                            data = {
+                                source: { x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, y: parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT }
+                                , target: { x: parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, y: parseFloat(d3.select(this).attr("y")) - 8 }
+                            }
+                        }
+                        var _line = lines.append("path")
+                            .attr("class", "superline")
+                            .attr("d", lineBuilder(data))
+                            .attr("stroke", "#0000ff")
+                            .attr("fill", "none");
+                        superLine = new SuperLine();
+                        superLine.from = selectUI.ui;
+                        superLine.to = d3.select(this);
+                        superLine.line = _line;
+                        lineArray.push(superLine)
+                        _line
+                            .attr("_id", selectUI.ui.attr("_id") + "_" + d3.select(this).attr("_id")) // 添加 _id 结构是fromUIId_toUIId
+                            .on("mouseover", function () {
+                                d3.select(this)
+                                    .attr("stroke-width", "4px")
+                                    .attr("stroke", "#ff0000")
+                                    .style("cursor", "hand");
+                            })
+                            .on("mouseout", function () {
+                                d3.select(this)
+                                    .attr("stroke-width", "2px")
+                                    .attr("stroke", "#0000ff")
+                                    .style("cursor", "defult");
+                            })
+                            .on("mousedown", function () {
+                                d3.event.stopPropagation();
+                                selectLine = d3.select(this);
+                                var obj = {};
+                                obj.value = RTGHT_ITEM_DELETE_LINE;
+                                obj.name = DELETE_LINE;
+                                rightMenuItems = [obj];
+                                // 设置右键菜单
+                                setRightMenu();
+                            })
+                    } else {
+                        alert("已经存在连线!!")
+                    }
+                } else {
+                    alert("起始点不能是终点!")
                 }
             }
-            scale = scale.replace("(","").replace(")","");
-            translate = translate.replace("(","").replace(")","").split(",");
-            return {"translate":translate,"scale":scale}
-        }catch (e){
-            console.log("transform 解析出错")
         }
-    }
+        /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
+
+        /*------------------------------------------------------------- 公用方法（工具） start------------------------------------------------------------------*/
+        /**
+         *  设置右键菜单
+         *
+         */
+        function setRightMenu() {
+            d3.selectAll(".itemMenuDiv")
+                .remove();
+            for (var i = 0; i < rightMenuItems.length; i++) {
+                var rightMenu = d3.selectAll("#rightMenu")
+                    .append("div")
+                    .attr("class", "itemMenuDiv")
+                    .append("text")
+                    .attr("class", "text")
+                    .text(rightMenuItems[i]["name"])
+                    .attr("value", rightMenuItems[i]["value"]);
+            }
+        }
+        /**
+         * 重新绘线
+         */
+        function redrawLines(iconId) {
+            var lines = getLines(iconId);
+            for (var i = 0; i < lines.length; i++) {
+                var _tmp = lines[i];
+                // 直线
+                var data = [];
+                data[0] = { "x": parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, "y": parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT / 2 };
+                data[1] = { "x": parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, "y": parseFloat(_tmp.to.attr("y")) + ICON_HEIGHT / 2 };
+                // 曲线(如果使用直线需要注释)
+                var data
+                if (parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT >= parseFloat(_tmp.to.attr("y"))) {
+                    data = {
+                        source: { x: parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.from.attr("y")) }
+                        , target: { x: parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.to.attr("y")) + ICON_HEIGHT + 6 }
+                    };
+                } else {
+                    data = {
+                        source: { x: parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT }
+                        , target: { x: parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.to.attr("y")) - 8 }
+                    };
+                }
+                _tmp.line
+                    .attr("d", lineBuilder(data));
+            }
+        }
+        /**
+        * 是否已经存在线
+        */
+        function hasLine(fromId, toId) {
+            var hasIn = false;
+            for (var i = 0; i < lineArray.length; i++) {
+                var _tmpline = lineArray[i];
+                if (_tmpline.from.attr("_id") == fromId && _tmpline.to.attr("_id") == toId
+                    || _tmpline.from.attr("_id") == toId && _tmpline.to.attr("_id") == fromId) {
+                    hasIn = true;
+                    break;
+                }
+            }
+            return hasIn;
+        }
+        /**
+         * 根据起点和终点找线
+         */
+        function getLineByFormAndTo(fromId, toId) {
+            var superLine = null;
+            for (var i = 0; i < lineArray.length; i++) {
+                var _tmpline = lineArray[i];
+                if (_tmpline.from.attr("_id") == fromId && _tmpline.to.attr("_id") == toId) {
+                    superLine = _tmpline;
+                    break;
+                }
+            }
+            return superLine;
+        }
+        /**
+         * 根据起点找线数组
+         */
+        function getLines(id) {
+            var lines = [];
+            for (var i = 0; i < lineArray.length; i++) {
+                var _tmpline = lineArray[i];
+                if (_tmpline.from.attr("_id") == id || _tmpline.to.attr("_id") == id) {
+                    lines.push(_tmpline);
+                }
+            }
+            return lines;
+        }
+        /**
+         * 删除和节点相关线
+         */
+        function delLines(iconId) {
+            for (var i = lineArray.length - 1; i >= 0; i--) {
+                var _tmpline = lineArray[i];
+                if (_tmpline.from.attr("_id") == iconId || _tmpline.to.attr("_id") == iconId) {
+                    lineArray.splice(i, 1);
+                }
+            }
+        }
+        /**
+         * 删除线
+         */
+        function delLine(line) {
+            for (var i = lineArray.length - 1; i >= 0; i--) {
+                var _tmpline = lineArray[i];
+                if (_tmpline.line.attr("_id") == line.attr("_id")) {
+                    lineArray.splice(i, 1);
+                }
+            }
+        }
+
+        /**
+         *  解析transform
+         *
+         */
+        function getTranslate(a) {
+            try {
+                if (a.indexOf("translate") != -1) {
+                    var b = a.split("translate")[0];
+                    if (b.indexOf("scale") != -1) {
+                        scale = b.split("scale")[1];
+                        translate = a.split("translate")[1]
+                    } else {
+                        scale = a.split("translate")[1].split("scale")[1];
+                        translate = a.split("translate")[1].split("scale")[0]
+                    }
+                }
+                scale = scale.replace("(", "").replace(")", "");
+                translate = translate.replace("(", "").replace(")", "").split(",");
+                return { "translate": translate, "scale": scale }
+            } catch (e) {
+                console.log("transform 解析出错")
+            }
+        }
     /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
 
-</script>
+    </script>
 </body>
+
 </html>
