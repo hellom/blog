@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<style>
+  /* .aspect-ratio-boxes {
+    overflow: hidden;
+    height: 0;
+    padding-top: calc(281/450 * 100%);
+    background: url(./3.jpg) no-repeat;
+    background-size: contain
+  } */
+
+  /* .aspect-ratio-box {
+    height: 0;
+    overflow: hidden;
+    padding-top: calc(591.44 / 1127.34 * 100%);
+    background: orange;
+    position: relative;
+  }
+
+  .aspect-ratio-box-inside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  } */
+
+  /* .aspect-ratio-box {
+    background: orange;
+  }
+
+  .aspect-ratio-box::before {
+    content: "";
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+    padding-top: calc(591.44 / 1127.34 * 100%);
+  }
+
+  .aspect-ratio-box::after {
+    content: "";
+    display: table;
+    clear: both;
+  } */
+
+  :root {
+    --aspect-ratio: 1 / 1;
+  }
+
+  [style*="--aspect-ratio"] {
+    width: 50vw;
+    margin: 20px auto;
+    background: orange;
+  }
+
+  [style*="--aspect-ratio"]> :first-child {
+    width: 100%;
+  }
+
+  [style*="--aspect-ratio"]>* {
+    height: auto;
+  }
+
+  @supports (--custom:property) {
+    [style*="--aspect-ratio"] {
+      position: relative;
+    }
+    [style*="--aspect-ratio"]::before {
+      content: "";
+      display: block;
+      padding-bottom: calc(100% / (var(--aspect-ratio)));
+    }
+    [style*="--aspect-ratio"]> :first-child {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
+  }
+</style>
+
+<body>
+  <!-- <div class="aspect-ratio-boxes"></div> -->
+  <!-- <div class="aspect-ratio-box">
+    <div class='aspect-ratio-box-inside'>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum doloremque similique officia deleniti, ducimus inventore
+      voluptatibus doloribus aut possimus quia error, quidem quibusdam, dolor mollitia atque perspiciatis laudantium fugiat
+      vero nobis! Reprehenderit facere dolore natus mollitia, nobis atque cum alias ut nulla! Blanditiis vitae porro, saepe
+      sed quis natus asperiores sunt perspiciatis. Quod maiores et deserunt dolorum at obcaecati tempore provident iusto
+      vitae reiciendis aperiam illum possimus modi odit ratione doloribus praesentium distinctio, quaerat quis alias. Ratione
+      architecto, rerum deleniti officia consequuntur voluptatem dignissimos! Nisi sed ipsam modi voluptates, sapiente asperiores
+      animi quas illum vitae architecto amet autem, placeat voluptatem culpa distinctio! At, aspernatur a harum hic eum,
+      eveniet aliquid mollitia doloribus. Eaque amet sapiente labore impedit maiores distinctio expedita, aliquam alias dolorum
+      tenetur ipsa unde? Debitis soluta, ad laboriosam eum ut minima hic error voluptates, maxime nisi. Sunt natus quos,
+      earum deserunt sapiente nemo itaque! Incidunt ipsam modi recusandae neque architecto soluta dolorum earum unde, maxime
+      voluptate ad eius dolorem! Nisi quas impedit nesciunt! Numquam, aut et deserunt quisquam voluptatibus vero incidunt.
+      Quod esse fugit, eligendi dolores, ipsum repellat perferendis alias praesentium cupiditate consequatur earum blanditiis
+      id fugiat. Molestias veritatis rerum sint in ut fugiat amet voluptas praesentium commodi?
+    </div>
+  </div> -->
+  <div style="--aspect-ratio:16/9">
+    <!-- <iframe src="https://www.youtube.com/embed/upPCohrJcbw?showinfo=0&modestbranding=1" frameborder="0" allowfullscreen=""></iframe> -->
+    <img src='./7.jpg' />
+  </div>
+</body>
+
+</html>

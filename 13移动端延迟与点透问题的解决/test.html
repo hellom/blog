@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <title>300ms延迟现象</title>
+</head>
+
+<body>
+  <div>
+    <button>按钮a</button>
+
+  </div>
+
+</body>
+
+<script>
+  var btn = document.querySelector('button');
+  btn.addEventListener('touchstart', function (evt) {
+    var sp = document.createElement('span');
+    sp.innerText = Date.now() + '   touchstart';
+    document.body.appendChild(sp);
+    document.body.appendChild(document.createElement('br'));
+  })
+  btn.addEventListener('touchmove', function (evt) {
+    var sp = document.createElement('span');
+    sp.innerText = Date.now() + '   touchmove';
+    document.body.appendChild(sp);
+    document.body.appendChild(document.createElement('br'));
+  })
+  btn.addEventListener('touchend', function (evt) {
+    var sp = document.createElement('span');
+    sp.innerText = Date.now() + '   touchend';
+    document.body.appendChild(sp);
+    document.body.appendChild(document.createElement('br'));
+  })
+  btn.addEventListener('click', function (evt) {
+    // var sp = document.createElement('span');
+    // sp.innerText = Date.now() + '   click';
+    // document.body.appendChild(sp);
+    // document.body.appendChild(document.createElement('br'));
+    // document.body.appendChild(document.createElement('br'));
+    alert('a');
+  })
+</script>
+
+</html>

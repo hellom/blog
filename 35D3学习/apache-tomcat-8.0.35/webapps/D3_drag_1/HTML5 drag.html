@@ -221,6 +221,7 @@
                 var the = event.srcElement;
                 if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
                     // 显示右键菜单
+                    console.log(d3.selectAll(".itemMenuDiv"));
                     if (d3.selectAll(".itemMenuDiv")[0].length > 0 && couldShowRightMenu) {
                         showRightMenu(event);
                     }
@@ -351,6 +352,9 @@
             })
             // 禁止冒泡
             .on("dragstart", function () {
+                d3.select(this)
+                    .style("cursor", "move");
+                // d3.event.sourceEvent.preventDefault();
                 d3.event.sourceEvent.stopPropagation();
             })
             .on("drag", function () {
@@ -381,6 +385,8 @@
                         // 获取偏移量
 
                         var _tmpTransform = getTranslate(view.attr("transform"));
+                        console.log(_tmpTransform);
+
                         // 直线
                         if (_tmpTransform) {
                             data[0] = {
@@ -388,6 +394,8 @@
                                 , "y": parseFloat(selectUI.ui.attr("y")) + parseFloat(_tmpTransform.translate[1]) + ICON_HEIGHT / 2
                             };
                             data[1] = { "x": d3.event.sourceEvent.layerX, "y": d3.event.sourceEvent.layerY };
+                            console.log(data);
+
                         } else {
                             data[0] = {
                                 "x": parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2
@@ -396,27 +404,29 @@
                             data[1] = { "x": d3.event.sourceEvent.layerX, "y": d3.event.sourceEvent.layerY };
                         }
                         // 曲线(如果使用直线需要注释)
-                        var data;
-                        if (_tmpTransform) {
-                            data = {
-                                source: {
-                                    x: parseFloat(selectUI.ui.attr("x")) + parseFloat(_tmpTransform.translate[0]) + ICON_WIDTH / 2
-                                    , y: parseFloat(selectUI.ui.attr("y")) + parseFloat(_tmpTransform.translate[1]) + ICON_HEIGHT / 2
-                                }
-                                , target: { x: d3.event.sourceEvent.layerX, y: d3.event.sourceEvent.layerY }
-                            }
-                        } else {
-                            data = {
-                                source: {
-                                    x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2
-                                    , y: parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT / 2
-                                }
-                                , target: { x: d3.event.sourceEvent.layerX, y: d3.event.sourceEvent.layerY }
-                            }
-                        }
+                        // var data;
+                        // if (_tmpTransform) {
+                        //     data = {
+                        //         source: {
+                        //             x: parseFloat(selectUI.ui.attr("x")) + parseFloat(_tmpTransform.translate[0]) + ICON_WIDTH / 2
+                        //             , y: parseFloat(selectUI.ui.attr("y")) + parseFloat(_tmpTransform.translate[1]) + ICON_HEIGHT / 2
+                        //         }
+                        //         , target: { x: d3.event.sourceEvent.layerX, y: d3.event.sourceEvent.layerY }
+                        //     }
+                        // } else {
+                        //     data = {
+                        //         source: {
+                        //             x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2
+                        //             , y: parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT / 2
+                        //         }
+                        //         , target: { x: d3.event.sourceEvent.layerX, y: d3.event.sourceEvent.layerY }
+                        //     }
+                        // }
                         // 连线
+                        console.log(lineBuilder(data));
+                        createLine(data)
                         tmpLine
-                            .attr("d", lineBuilder(data))
+                            .attr("d", createLine(data))
                     }
                 }
             })
@@ -430,18 +440,52 @@
         /**
          * 直线
          */
-        //    var lineBuilder = d3.svg.line()
-        //        .x(function (d) {
-        //            return d.x;
-        //        })
-        //        .y(function (d) {
-        //            return d.y
-        //        });
+        var lineBuilder = d3.svg.line()
+            .x(function (d) {
+                console.log(d);
+
+                return d.x;
+            })
+            .y(function (d) {
+                return d.y
+            }).interpolate('step-after');;
+        var createLine = function (data) {
+            var startX = data[0].x;
+            var startY = data[0].y;
+            var moveX = data[1].x;
+            var moveY = data[1].y;
+            var m = 'startX,startY', tick = 40, v = moveY, h = moveX, d, firstH = startX + tick, firstV = startY + tick, direction = 'right';
+            if (moveY - startY > 0) {
+                direction = 'bottom'
+            }
+            if (moveY - startY < 0) {
+                direction = 'top'
+                firstV = moveY - tick
+            }
+            if (moveX - startX < 0) {
+                direction = 'left'
+                firstH = startX - tick;
+            }
+            switch (direction) {
+                case 'right':
+                    d = "M " + startX + ', ' + startY + ' H' + firstH + ' V' + v + " H" + h;
+                case 'left':
+                    d = "M " + startX + ', ' + startY + ' H' + firstH + ' V' + v + " H" + h;
+                case 'top':
+                    d = "M " + startX + ', ' + startY + ' V' + firstV + " H" + h + ' V' + moveY;
+                case 'bottom':
+                    d = "M " + startX + ', ' + startY + ' V' + firstV + " H" + h + ' V' + moveY;
+            }
+            console.log(d);
+            return d
+
+        }
+
         /**
          * 曲线
          */
-        var lineBuilder = d3.svg.diagonal()
-            .projection(function (d) { return [d.x, d.y] })
+        // var lineBuilder = d3.svg.diagonal()
+        //     .projection(function (d) { return [d.x, d.y] })
         /*-------------------------------------------------------------  end  ------------------------------------------------------------------*/
 
         /*------------------------------------------------------------- 布局 start------------------------------------------------------------------*/
@@ -484,8 +528,6 @@
             .attr("height", height - 5)
             // 鼠标拖动移入时
             .on("dragover", function () {
-                console.log(d3.event);
-
                 d3.event.preventDefault();
                 d3.event.dataTransfer.dropEffect = "copy";
                 return false;
@@ -582,10 +624,10 @@
                         return d3.event.y - rightDiv_top - ICON_HEIGHT / 2
                     }
                 })
+                .call(drag)
                 .on("mousedown", uiMouseDownHandler)
                 .on("mouseup", uiMouseUpHandler)
-                // 执行拖拽行为
-                .call(drag);
+            // 执行拖拽行为
 
             // 图片类型
             if (id == "1") {
@@ -669,21 +711,21 @@
                         data[0] = { "x": parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, "y": parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT / 2 };
                         data[1] = { "x": parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, "y": parseFloat(d3.select(this).attr("y")) + ICON_HEIGHT / 2 };
                         // 曲线(如果使用直线需要注释)
-                        var data;
-                        if (parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT >= parseFloat(d3.select(this).attr("y"))) {
-                            data = {
-                                source: { x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, y: parseFloat(selectUI.ui.attr("y")) }
-                                , target: { x: parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, y: parseFloat(d3.select(this).attr("y")) + ICON_HEIGHT + 6 }
-                            }
-                        } else {
-                            data = {
-                                source: { x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, y: parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT }
-                                , target: { x: parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, y: parseFloat(d3.select(this).attr("y")) - 8 }
-                            }
-                        }
+                        // var data;
+                        // if (parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT >= parseFloat(d3.select(this).attr("y"))) {
+                        //     data = {
+                        //         source: { x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, y: parseFloat(selectUI.ui.attr("y")) }
+                        //         , target: { x: parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, y: parseFloat(d3.select(this).attr("y")) + ICON_HEIGHT + 6 }
+                        //     }
+                        // } else {
+                        //     data = {
+                        //         source: { x: parseFloat(selectUI.ui.attr("x")) + ICON_WIDTH / 2, y: parseFloat(selectUI.ui.attr("y")) + ICON_HEIGHT }
+                        //         , target: { x: parseFloat(d3.select(this).attr("x")) + ICON_WIDTH / 2, y: parseFloat(d3.select(this).attr("y")) - 8 }
+                        //     }
+                        // }
                         var _line = lines.append("path")
                             .attr("class", "superline")
-                            .attr("d", lineBuilder(data))
+                            .attr("d", createLine(data))
                             .attr("stroke", "#0000ff")
                             .attr("fill", "none");
                         superLine = new SuperLine();
@@ -755,18 +797,18 @@
                 data[0] = { "x": parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, "y": parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT / 2 };
                 data[1] = { "x": parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, "y": parseFloat(_tmp.to.attr("y")) + ICON_HEIGHT / 2 };
                 // 曲线(如果使用直线需要注释)
-                var data
-                if (parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT >= parseFloat(_tmp.to.attr("y"))) {
-                    data = {
-                        source: { x: parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.from.attr("y")) }
-                        , target: { x: parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.to.attr("y")) + ICON_HEIGHT + 6 }
-                    };
-                } else {
-                    data = {
-                        source: { x: parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT }
-                        , target: { x: parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.to.attr("y")) - 8 }
-                    };
-                }
+                // var data
+                // if (parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT >= parseFloat(_tmp.to.attr("y"))) {
+                //     data = {
+                //         source: { x: parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.from.attr("y")) }
+                //         , target: { x: parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.to.attr("y")) + ICON_HEIGHT + 6 }
+                //     };
+                // } else {
+                //     data = {
+                //         source: { x: parseFloat(_tmp.from.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.from.attr("y")) + ICON_HEIGHT }
+                //         , target: { x: parseFloat(_tmp.to.attr("x")) + ICON_WIDTH / 2, y: parseFloat(_tmp.to.attr("y")) - 8 }
+                //     };
+                // }
                 _tmp.line
                     .attr("d", lineBuilder(data));
             }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>解决点透现象</title>
+</head>
+
+<body>
+  <div>
+    <button>按钮a</button>
+    <!-- <button style="position: absolute;left: 8px;">按钮b</button> -->
+
+  </div>
+
+</body>
+<script src="fastclick.js"></script>
+<script>
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function () {
+      FastClick.attach(document.body);
+    }, false);
+  }
+  var btn = document.querySelectorAll('button');
+
+  btn[0].addEventListener('click', function (evt) {
+    alert('a');
+    // var sp = document.createElement('span');
+    // sp.innerText = Date.now() + '   touchend';
+    // document.body.appendChild(sp);
+    // document.body.appendChild(document.createElement('br'));
+  })
+  // btn[1].addEventListener('touchend', function (evt) {
+  //   alert('b');
+  //   this.style.display = 'none';
+  // });
+  document.body.addEventListener('click', function (evt) {//捕获过程看事件源
+    console.log(evt.target);
+  }, true);
+</script>
+
+</html>

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>flow-chart</title>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="http://d3js.org/d3.v4.min.js"></script>
   <style>
     .container,
     body,
@@ -151,6 +151,9 @@
     .style("pointer-events", "all");
 
 
+  var dragBehavior = d3.drag().on('drag', dragged);
+
+
   function dropHandler() {
     d3.event.preventDefault();
     var type = d3.event.dataTransfer.getData("type");
@@ -172,7 +175,7 @@
       })
       .on("mousedown", uiMouseDownHandler)
       .on("mouseup", uiMouseUpHandler)
-      .call(d3.drag().on('drag', dragged))
+      .call(dragBehavior)
     // 图片类型
     if (id == "1") {
       ui.attr("xlink:href", "img/a.png");
@@ -347,6 +350,7 @@
         * 鼠标按弹起
         */
   function uiMouseUpHandler() {
+    alert(123123)
     if (true) {
       // 起点不是终点
       if (selectUI && selectUI.id != d3.select(this).attr("_id")) {
